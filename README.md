@@ -8,9 +8,9 @@ there are 2 methods.
 # Usage 
 
 You can use getanimals like this:
-````
+````js
 var covid = require('novelcovid');
 
-covid.all() // you can use any other animal ex getanimals.cat() etc
+covid.all() 
   .then((data) => console.log(data))
   .catch((err) => console.error(err));
