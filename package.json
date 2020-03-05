@@ -1,0 +1,24 @@
+{
+  "name": "novelcovid",
+  "dependencies": {
+    "node-fetch": "^2.6.0"
+  },
+  "version": "1.0.1",
+  "description": "An Api wrapper to get information about the Novel CoronaVirus.",
+  "main": "index.js",
+  "keywords": [
+    "coronavirus",
+    "wrapper",
+    "api"
+  ],
+  "author": "EliteDaMyth",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NovelCOVID/node-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NovelCOVID/node-api/issues"
+  },
+  "homepage": "https://github.com/NovelCOVID/node-api#readme"
+}
