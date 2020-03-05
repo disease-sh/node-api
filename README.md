@@ -7,7 +7,7 @@ there are 2 methods.
 
 # Usage 
 
-You can use getanimals like this:
+You can use it like this:
 ````js
 var covid = require('novelcovid');
 
