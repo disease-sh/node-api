@@ -3,7 +3,7 @@
   "dependencies": {
     "node-fetch": "^2.6.0"
   },
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "An Api wrapper to get information about the Novel CoronaVirus.",
   "main": "index.js",
   "keywords": [
