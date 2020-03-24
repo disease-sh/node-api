@@ -35,3 +35,10 @@ covid.states()
   .then((data) => console.log(data))
   .catch((err) => console.error(err));
 ```
+
+**.jhucsse(?filters)**
+```js
+var covid = require('novelcovid');
+
+let covidSpain = await covid.jhucsse({country: "Spain"});;
+```
