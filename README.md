@@ -1,5 +1,5 @@
 <div align="center">
-			<font size = 7> NovelCovid </font>
+        <h1> NovelCovid </h1>
   <br>
   <br>
     <strong> <i>View information on the Coronavirus outbreak around the world.</i></strong>
