@@ -1,0 +1,12 @@
+src
+node_modules
+package-lock.json
+yarn.lock
+tsconfig.json
+docs.json
+.eslintrc
+.editorconfig
+.npmignore
+.gitignore
+.gitattributes
+.github

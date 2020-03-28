@@ -1,89 +1,179 @@
-# Covid-19 Tracker
+<div align="center">
+			<font size = 7> NovelCovid </font>
+  <br>
+  <br>
+    <strong> <i>View information on the Coronavirus outbreak around the world.</i></strong>
+  <br>
+  <br>
+  <hr>
+  <a href="https://discord.gg/tTEBTxR">
+    <img src="https://img.shields.io/discord/502930687503106068.svg?colorB=Blue&logo=discord&label=Support&style=for-the-badge" alt="Support"></a>
 
-View information on the Coronavirus outbreak around the world.
+<a href="https://github.com/NovelCOVID/node-api/actions?query=workflow%3ABuild">
+    <img src="https://img.shields.io/github/workflow/status/NovelCOVID/node-api/Build?color=green&label=Build&logo=github&logoColor=green&style=for-the-badge" alt="Build">
+</a>
 
+<a href="https://github.com/NovelCOVID/node-api">
+    <img src="https://img.shields.io/github/languages/top/NovelCOVID/node-api?logo=typescript&logoColor=blue&style=for-the-badge" alt="Languages">
+</a>
+<br>
+<a href="https://www.npmjs.com/package/novelcovid">
+    <img src="https://img.shields.io/npm/v/novelcovid?logo=npm&style=for-the-badge" alt="Version">
+</a>
+<a href="https://www.npmjs.com/package/novelcovid">
+	<img src="https://img.shields.io/bundlephobia/min/novelcovid?color=red&label=SIZE&logo=npm&style=for-the-badge", alt="Size">
+</a>
+<a href="https://www.npmjs.com/package/novelcovid">
+<img src="https://img.shields.io/npm/dw/novelcovid?logo=npm&style=for-the-badge", alt="Downloads">
+</a>
+<br>
+<a href="https://github.com/NovelCOVID/node-api/issues">
+    <img src="https://img.shields.io/github/issues/NovelCOVID/node-api?color=red&logo=github&logoColor=red&style=for-the-badge" alt="Issues">
+</a>
 
-![npm](https://flat.badgen.net/npm/v/novelcovid) ![InstallSize](https://badgen.net/packagephobia/install/novelcovid) [![Discord](https://img.shields.io/badge/Discord-600%20Online-7289da)](https://discord.gg/tTEBTxR)
+<a href="https://github.com/NovelCOVID/node-api/pulls">
+    <img src="https://img.shields.io/github/issues-pr/NovelCOVID/node-api?logo=github&logoColor=brightgreen&style=for-the-badge" alt="Pull Request">
+</a>
+<a href="https://github.com/NovelCOVID/node-api/blob/master/LICENSE"><img src="https://img.shields.io/github/license/NovelCOVID/node-api?color=37f149&style=for-the-badge" alt="LICENSE">
+</a>
+<br>
+<br>
+<hr>
+</div>
 
 
 [Beta NPM Package](https://www.npmjs.com/package/covidtracker)
-  
+
 
 ## Installation
 
-Stable Release (`v1.0.6`)
+Npm:
 
-```js
-
+```bash
 npm i novelcovid
-
 ```
 
-### Methods
+Yarn:
 
->  **.getAll()**
-
->  **.getCountry(country, sort)**
-
->  **.getState(state, sort)**
-
-  
-
-## Loading and configuring the module
-
-We suggest you load the module via `require`, pending the stabalizing of es modules in node:
-
-```js
-
-// Declare the package
-
-const track = require('novelcovid');
-
+```bash
+yarn add novelcovid
 ```
 
-To actually use the data, you will need an [async/await](https://javascript.info/async-await).
+## Usage
+
+JavaScript:
 
 ```js
+const { NovelCovid } = require('novelcovid');
 
-// Declare the package
+const track = new NovelCovid();
+```
 
-const track = require('novelcovid');
+TypeScript:
 
-// Now we create a async/await
+```ts
+import { NovelCovid } from 'novelcovid';
 
-async () => {
+const track = new NovelCovid();
+```
 
-// Now we await it.
+## Methods
 
-let data = await track.getAll();
+### All
+```js
+<Class>.all();
+```
+### Countries
 
-// Make sure you return it, this usually implies if you are using this inside a function.
+```js
+<Class>.countries(); // for ALL.
+```
+```js
+<Class>.countries('country name'); // For Specfic Country
+```
+```js
+<Class>.countries(null, 'sort by'); // For Sorting
+```
 
-return console.log(`
-Cases: ${data.cases}
-Deaths: ${data.deaths}
-Recovered: ${data.recovered}`)
+### States
+```js
+<Class>.states(); // For ALL
 
+<Class>.states('country name');
+```
+
+### Histroical
+```js
+<Class>.historical(); // For ALL
+```
+```js
+<Class>.historical('country name'); // Specific Country
+```
+
+### Jhucsse
+```js
+<Class>.jhucsse();
+```
+
+## Interfaces
+```ts
+export interface All {
+	cases: number;
+	deaths: number;
+	recovered: number;
+	updated: number;
+	active: number;
 }
 
-```
-
-#### Sorting the data.
-
-Some [methods](https://www.npmjs.com/package/covidtracker#methods) can be sorted.
-
-```js
-
-const track = require('novelcovid');
-
-async () => {
-
-// Sorting a specific state/country wont work, its best to leave it blank/null.
-
-let country = await track.getCountry(null, 'recovered');
-
-return console.log(data);
-
+export interface Country {
+	country: string;
+	countryInfo: {
+		_id: number;
+		latitude: number;
+		longitue: number;
+		flag: string;
+		iso3: string;
+		iso2: string;
+	};
+	cases: number;
+	todaysCases: number;
+	deaths: number;
+	recovered: number;
+	active: number;
+	critical: number;
+	casesPerOneMillion: number;
+	deathsPerOneMillion: number;
 }
 
+export interface State {
+	state: string;
+	cases: number;
+	todayCases: number;
+	deaths: number;
+	todayDeaths: number;
+	active: number;
+}
+
+export interface Historical {
+	country: string;
+	province: string | null;
+	timeline: {
+		cases: object;
+		deaths: object;
+	};
+}
+export interface Jhucsse {
+	country: string;
+	province: string | null;
+	updatedAt: Date;
+	stats: {
+		confirmed: number;
+		deaths: number;
+		recovered: number;
+	};
+	coordinates: {
+		latitude: string;
+		longitude: string;
+	};
+}
 ```
