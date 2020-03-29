@@ -39,8 +39,6 @@
 </div>
 
 
-[Beta NPM Package](https://www.npmjs.com/package/covidtracker)
-
 
 ## Installation
 
@@ -77,100 +75,47 @@ const track = new NovelCovid();
 ## Methods
 
 ### All
+
 ```js
-<Class>.all();
+.all();
 ```
 ### Countries
 
 ```js
-<Class>.countries(); // for ALL.
+.countries(); // for ALL.
 ```
+
 ```js
-<Class>.countries('country name'); // For Specfic Country
+.countries('country name'); // For Specfic Country
 ```
+
 ```js
-<Class>.countries(null, 'sort by'); // For Sorting
+.countries(null, 'sort by'); // For Sorting
 ```
 
 ### States
 ```js
-<Class>.states(); // For ALL
+.states(); // For ALL stats
+```
 
-<Class>.states('country name');
+```js
+.states('state name'); //  For specfic State
 ```
 
 ### Histroical
 ```js
-<Class>.historical(); // For ALL
+.historical(); // For ALL
 ```
+
 ```js
-<Class>.historical('country name'); // Specific Country
+.historical('country name'); // Specific Country
+```
+
+```js
+.historical('country name', 'province name'); // Specfic Country and Province
 ```
 
 ### Jhucsse
 ```js
-<Class>.jhucsse();
-```
-
-## Interfaces
-```ts
-export interface All {
-	cases: number;
-	deaths: number;
-	recovered: number;
-	updated: number;
-	active: number;
-}
-
-export interface Country {
-	country: string;
-	countryInfo: {
-		_id: number;
-		latitude: number;
-		longitue: number;
-		flag: string;
-		iso3: string;
-		iso2: string;
-	};
-	cases: number;
-	todaysCases: number;
-	deaths: number;
-	recovered: number;
-	active: number;
-	critical: number;
-	casesPerOneMillion: number;
-	deathsPerOneMillion: number;
-}
-
-export interface State {
-	state: string;
-	cases: number;
-	todayCases: number;
-	deaths: number;
-	todayDeaths: number;
-	active: number;
-}
-
-export interface Historical {
-	country: string;
-	province: string | null;
-	timeline: {
-		cases: object;
-		deaths: object;
-	};
-}
-export interface Jhucsse {
-	country: string;
-	province: string | null;
-	updatedAt: Date;
-	stats: {
-		confirmed: number;
-		deaths: number;
-		recovered: number;
-	};
-	coordinates: {
-		latitude: string;
-		longitude: string;
-	};
-}
+.jhucsse();
 ```
