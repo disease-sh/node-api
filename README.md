@@ -3,7 +3,7 @@
     <strong> <i>View information on the Coronavirus outbreak around the world.</i></strong>
   <br>
   <br>
-  <a href="https://discord.gg/tTEBTxR">
+  <a href="https://discord.gg/EvbMshU">
     <img src="https://img.shields.io/discord/502930687503106068.svg?colorB=Blue&logo=discord&label=Support&style=for-the-badge" alt="Support"></a>
 
 <a href="https://github.com/NovelCOVID/node-api/actions?query=workflow%3ABuild">
