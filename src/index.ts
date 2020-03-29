@@ -30,7 +30,7 @@ export class NovelCovid {
 	async countries(): Promise<Array<Country>>;
 	async countries(country?: string | null | number): Promise<Country | null>;
 	// eslint-disable-next-line @typescript-eslint/unified-signatures
-	async countries(country: null, sort?: keyof Country): Promise<Array<Country>>;
+	async countries(country: null, sort?: keyof CountrySort): Promise<Array<Country>>;
 	async countries(country?: string | null | number, sort?: keyof Country): Promise<Array<Country> | Country | null> {
 		if (country) {
 
@@ -155,4 +155,15 @@ export interface Jhucsse {
 		latitude: string;
 		longitude: string;
 	};
+}
+
+export interface CountrySort {
+	cases: number;
+	todaysCases: number;
+	deaths: number;
+	recovered: number;
+	active: number;
+	critical: number;
+	casesPerOneMillion: number;
+	deathsPerOneMillion: number;
 }
