@@ -14,9 +14,9 @@ export class NovelCovid {
 
 	/**
 	 * @description Gets all the information from the api.
-	 * @returns {Promise<Array<All>>}
+	 * @returns {Promise<All>}
 	 */
-	async all(): Promise<Array<All>> {
+	async all(): Promise<All> {
 
 		return fetch(`${this.baseURL}/all`).then(json);
 	}
