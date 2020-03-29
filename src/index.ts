@@ -27,9 +27,11 @@ export class NovelCovid {
 	 * @param {String} sort - Sort by active, deaths , etc.
 	 * @returns {Promise<ArrayCountry> | null>}
 	 */
-	async countries(country?: string | null | number): Promise<Array<Country> | null>;
+	async countries(): Promise<Array<Country>>;
+	async countries(country?: string | null | number): Promise<Country | null>;
+	// eslint-disable-next-line @typescript-eslint/unified-signatures
 	async countries(country: null, sort?: keyof Country): Promise<Array<Country>>;
-	async countries(country?: string | null | number, sort?: keyof Country): Promise<Array<Country> | null> {
+	async countries(country?: string | null | number, sort?: keyof Country): Promise<Array<Country> | Country | null> {
 		if (country) {
 
 			return fetch(`${this.baseURL}/countries/${country}`).then(json);
@@ -50,8 +52,8 @@ export class NovelCovid {
 	 * @returns {Promise<void>}
 	 */
 	async states(): Promise<Array<State>>;
-	async states(state?: string| null): Promise<Array<State> | null>;
-	async states(state?: string | null): Promise<Array<State> | null> {
+	async states(state?: string| null): Promise<State | null>;
+	async states(state?: string | null): Promise<Array<State> | State | null> {
 
 		if (state) {
 
@@ -70,8 +72,8 @@ export class NovelCovid {
 	 * @returns {Promise<Array<Historical> | null>}
 	 */
 	async histroical(): Promise<Array<Historical>>;
-	async histroical(country?: string | null): Promise<Array<Historical> | null>;
-	async histroical(country?: string | null): Promise<Array<Historical> | null> {
+	async histroical(country?: string | null): Promise<Historical | null>;
+	async histroical(country?: string | null): Promise<Array<Historical> | Historical | null> {
 
 		if (country) {
 
