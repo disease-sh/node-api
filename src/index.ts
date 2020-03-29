@@ -14,9 +14,9 @@ export class NovelCovid {
 
 	/**
 	 * @description Gets all the information from the api.
-	 * @returns {Promise<All>}
+	 * @returns {Promise<Array<All>>}
 	 */
-	async all(): Promise<All> {
+	async all(): Promise<Array<All>> {
 
 		return fetch(`${this.baseURL}/all`).then(json);
 	}
@@ -25,11 +25,11 @@ export class NovelCovid {
 	 * @description Fetches data of corona virus by country.
 	 * @param {String} [country=null] - Country details you want to fetch.
 	 * @param {String} sort - Sort by active, deaths , etc.
-	 * @returns {Promise<Country>}
+	 * @returns {Promise<ArrayCountry>>}
 	 */
-	async countries(country?: string | null | number): Promise<Country | null>;
-	async countries(country: null, sort?: keyof Country): Promise<Country>;
-	async countries(country?: string | null | number, sort?: keyof Country): Promise<Country | null> {
+	async countries(country?: string | null | number): Promise<Array<Country> | null>;
+	async countries(country: null, sort?: keyof Country): Promise<Array<Country>>;
+	async countries(country?: string | null | number, sort?: keyof Country): Promise<Array<Country> | null> {
 		if (country) {
 
 			return fetch(`${this.baseURL}/countries/${country}`).then(json);
@@ -49,9 +49,9 @@ export class NovelCovid {
 	 * @param {String} [state=null] - State name data you wanna fetch.
 	 * @returns {Promise<void>}
 	 */
-	async states(): Promise<State>;
-	async states(state?: string| null): Promise<State | null>;
-	async states(state?: string | null): Promise<State | null> {
+	async states(): Promise<Array<State>>;
+	async states(state?: string| null): Promise<Array<State> | null>;
+	async states(state?: string | null): Promise<Array<State> | null> {
 
 		if (state) {
 
@@ -67,11 +67,11 @@ export class NovelCovid {
 	/**
 	 * @description Get historical data from the start of 2020. (JHU CSSE GISand Data).
 	 * @param {String} [country=null] -  Returns data of a specific country.
-	 * @returns {Promise<Historical | null>}
+	 * @returns {Promise<Array<Historical> | null>}
 	 */
-	async histroical(): Promise<Historical>;
-	async histroical(country?: string | null): Promise<Historical | null>;
-	async histroical(country?: string | null): Promise<Historical | null> {
+	async histroical(): Promise<Array<Historical>>;
+	async histroical(country?: string | null): Promise<Array<Historical> | null>;
+	async histroical(country?: string | null): Promise<Array<Historical> | null> {
 
 		if (country) {
 
@@ -85,9 +85,9 @@ export class NovelCovid {
 
 	/**
 	 * @description Return data from the John Hopkins CSSE Data Repository (Provinces and such).
-	 * @returns {Promise<Jhucsse>}
+	 * @returns {Promise<Array<Jhucsse>>}
 	 */
-	async jhucsse(): Promise<Jhucsse> {
+	async jhucsse(): Promise<Array<Jhucsse>> {
 
 		return fetch(`${this.baseURL}/v2/jhucsse`).then(json);
 
