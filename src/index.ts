@@ -27,11 +27,10 @@ export class NovelCovid {
 	 * @param {String} sort - Sort by active, deaths , etc.
 	 * @returns {Promise<ArrayCountry> | null>}
 	 */
-	async countries(): Promise<Array<Country>>;
 	async countries(country?: string | null | number): Promise<Country | null>;
-	// eslint-disable-next-line @typescript-eslint/unified-signatures
-	async countries(country: null, sort?: keyof CountrySort): Promise<Array<Country>>;
+	async countries(country?: null, sort?: keyof CountrySort): Promise<Array<Country>>;
 	async countries(country?: string | null | number, sort?: keyof Country): Promise<Array<Country> | Country | null> {
+
 		if (country) {
 
 			return fetch(`${this.baseURL}/countries/${country}`).then(json);
@@ -69,15 +68,20 @@ export class NovelCovid {
 	/**
 	 * @description Get historical data from the start of 2020. (JHU CSSE GISand Data).
 	 * @param {String} [country=null] -  Returns data of a specific country.
+	 * @param {String} [province=null] - Get a province within a country's time series.
 	 * @returns {Promise<Array<Historical> | null>}
 	 */
 	async histroical(): Promise<Array<Historical>>;
-	async histroical(country?: string | null): Promise<Historical | null>;
-	async histroical(country?: string | null): Promise<Array<Historical> | Historical | null> {
+	async histroical(country?: string | null, province?: string | null): Promise<HistoricalCountry | null>;
+	async histroical(country?: string | null, province?: string | null): Promise<Array<Historical> | HistoricalCountry | null> {
 
 		if (country) {
 
 			return fetch(`${this.baseURL}/v2/historical/${country}`).then(json);
+
+		} else if (country && province) {
+
+			return fetch(`${this.baseURL}/v2/historical/${country}/${province}`).then(json);
 
 		}
 
@@ -137,6 +141,14 @@ export interface State {
 export interface Historical {
 	country: string;
 	province: string | null;
+	timeline: {
+		cases: object;
+		deaths: object;
+	};
+}
+
+export interface HistoricalCountry {
+	country: string;
 	timeline: {
 		cases: object;
 		deaths: object;
