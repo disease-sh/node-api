@@ -25,7 +25,7 @@ export class NovelCovid {
 	 * @description Fetches data of corona virus by country.
 	 * @param {String} [country=null] - Country details you want to fetch.
 	 * @param {String} sort - Sort by active, deaths , etc.
-	 * @returns {Promise<ArrayCountry>>}
+	 * @returns {Promise<ArrayCountry> | null>}
 	 */
 	async countries(country?: string | null | number): Promise<Array<Country> | null>;
 	async countries(country: null, sort?: keyof Country): Promise<Array<Country>>;
