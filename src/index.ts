@@ -189,4 +189,5 @@ export interface CountrySort {
 export interface HistoricalAll {
 	cases: object;
 	deaths: object;
+    recovere: object;
 }
