@@ -67,6 +67,7 @@ export class NovelCovid {
 
 	/**
 	 * @description Get historical data from the start of 2020. (JHU CSSE GISand Data).
+	 * @param {String} [all=null] - Returns  all the cases and deaths.
 	 * @param {String} [country=null] -  Returns data of a specific country.
 	 * @param {String} [province=null] - Get a province within a country's time series.
 	 * @returns {Promise<Array<Historical> | null>}
