@@ -108,11 +108,15 @@ const track = new NovelCovid();
 ```
 
 ```js
-.historical('country name'); // Specific Country
+.historical(null, 'country name'); // Specific Country
 ```
 
 ```js
-.historical('country name', 'province name'); // Specfic Country and Province
+.historical(null, 'country name', 'province name'); // Specfic Country and Province
+```
+
+```js
+.historical(true); // All cases and deaths
 ```
 
 ### Jhucsse

@@ -28,7 +28,7 @@ export class NovelCovid {
 	 * @returns {Promise<ArrayCountry> | null>}
 	 */
 	async countries(country?: string | null | number): Promise<Country | null>;
-	async countries(country?: null, sort?: keyof CountrySort): Promise<Array<Country>>;
+	async countries(country: null, sort?: keyof CountrySort): Promise<Array<Country>>;
 	async countries(country?: string | null | number, sort?: keyof Country): Promise<Array<Country> | Country | null> {
 
 		if (country) {
@@ -51,7 +51,7 @@ export class NovelCovid {
 	 * @returns {Promise<void>}
 	 */
 	async states(): Promise<Array<State>>;
-	async states(state?: string| null): Promise<State | null>;
+	async states(state: string| null): Promise<State | null>;
 	async states(state?: string | null): Promise<Array<State> | State | null> {
 
 		if (state) {
@@ -72,8 +72,9 @@ export class NovelCovid {
 	 * @returns {Promise<Array<Historical> | null>}
 	 */
 	async histroical(): Promise<Array<Historical>>;
-	async histroical(country?: string | null, province?: string | null): Promise<HistoricalCountry | null>;
-	async histroical(country?: string | null, province?: string | null): Promise<Array<Historical> | HistoricalCountry | null> {
+	async histroical(all: boolean | null): Promise<HistoricalAll>;
+	async histroical(all: null, country?: string | null, province?: string | null): Promise<HistoricalCountry | null>;
+	async histroical(all?: boolean | null, country?: string | null, province?: string | null): Promise<Array<Historical> | HistoricalCountry | HistoricalAll | null> {
 
 		if (country) {
 
@@ -82,6 +83,10 @@ export class NovelCovid {
 		} else if (country && province) {
 
 			return fetch(`${this.baseURL}/v2/historical/${country}/${province}`).then(json);
+
+		} else if (all) {
+
+			return fetch(`${this.baseURL}/v2/historical/all`).then(json);
 
 		}
 
@@ -178,4 +183,9 @@ export interface CountrySort {
 	critical: number;
 	casesPerOneMillion: number;
 	deathsPerOneMillion: number;
+}
+
+export interface HistoricalAll {
+	cases: object;
+	deaths: object;
 }
