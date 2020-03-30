@@ -123,3 +123,4 @@ const track = new NovelCovid();
 ```js
 .jhucsse();
 ```
+Thanks!
