@@ -86,7 +86,7 @@ const track = new NovelCovid();
 ```
 
 ```js
-.countries('country name'); // For Specfic Country
+.countries('country name'); // For Specific Country
 ```
 
 ```js
@@ -95,14 +95,14 @@ const track = new NovelCovid();
 
 ### States
 ```js
-.states(); // For ALL stats
+.states(); // For ALL states
 ```
 
 ```js
 .states('state name'); //  For specfic State
 ```
 
-### Histroical
+### Historical
 ```js
 .historical(); // For ALL
 ```
@@ -112,7 +112,7 @@ const track = new NovelCovid();
 ```
 
 ```js
-.historical(null, 'country name', 'province name'); // Specfic Country and Province
+.historical(null, 'country name', 'province name'); // Specific Country and Province
 ```
 
 ```js
