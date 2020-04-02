@@ -25,7 +25,7 @@ export class NovelCovid {
 	 * @description Fetches data of corona virus by country.
 	 * @param {String} [country=null] - Country details you want to fetch.
 	 * @param {String} sort - Sort by active, deaths , etc.
-	 * @returns {Promise<ArrayCountry> | null>}
+	 * @returns {Promise<Array<Country>| Country |null>}
 	 */
 	async countries(country?: string | null | number): Promise<Country | null>;
 	async countries(country: null, sort?: keyof CountrySort): Promise<Array<Country>>;
@@ -48,7 +48,7 @@ export class NovelCovid {
 	/**
 	 * @description Fetches data of corona virus in United States.
 	 * @param {String} [state=null] - State name data you wanna fetch.
-	 * @returns {Promise<void>}
+	 * @returns {Promise<Array<State> | State | null>}
 	 */
 	async states(): Promise<Array<State>>;
 	async states(state: string| null): Promise<State | null>;
@@ -70,12 +70,12 @@ export class NovelCovid {
 	 * @param {String} [all=null] - Returns  all the cases and deaths.
 	 * @param {String} [country=null] -  Returns data of a specific country.
 	 * @param {String} [province=null] - Get a province within a country's time series.
-	 * @returns {Promise<Array<Historical> | null>}
+	 * @returns {Promise<Array<Historical> | HistoricalAll | HistoricalCountry | null>}
 	 */
-	async histroical(): Promise<Array<Historical>>;
-	async histroical(all: boolean | null): Promise<HistoricalAll>;
-	async histroical(all: null, country?: string | null, province?: string | null): Promise<HistoricalCountry | null>;
-	async histroical(all?: boolean | null, country?: string | null, province?: string | null): Promise<Array<Historical> | HistoricalCountry | HistoricalAll | null> {
+	async historical(): Promise<Array<Historical>>;
+	async historical(all: boolean | null): Promise<HistoricalAll>;
+	async historical(all: null, country?: string | null, province?: string | null): Promise<HistoricalCountry | null>;
+	async historical(all?: boolean | null, country?: string | null, province?: string | null): Promise<Array<Historical> | HistoricalCountry | HistoricalAll | null> {
 
 		if (country) {
 
@@ -189,5 +189,6 @@ export interface CountrySort {
 export interface HistoricalAll {
 	cases: object;
 	deaths: object;
-    recovere: object;
+	recovered: object;
 }
+
