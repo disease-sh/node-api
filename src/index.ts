@@ -46,6 +46,23 @@ export class NovelCovid {
 	}
 
 	/**
+	 * @description Returns all the available countries.
+	 * @returns {Array<string>}
+	 */
+	async countriesNames(): Promise<Array<string>> {
+		this.countries().then(data => {
+			if(data) {
+				let countries = data as unknown as Country[];
+				return countries.map(x => x.country).sort();
+			} else {
+				return new Array<string>();
+			}
+		});
+
+		return new Array<string>();
+	}
+
+	/**
 	 * @description Fetches data of corona virus in United States.
 	 * @param {String} [state=null] - State name data you wanna fetch.
 	 * @returns {Promise<Array<State> | State | null>}
@@ -126,13 +143,15 @@ export interface Country {
 		iso2: string;
 	};
 	cases: number;
-	todaysCases: number;
+	todayCases: number;
 	deaths: number;
+	todayDeaths: number;
 	recovered: number;
 	active: number;
 	critical: number;
 	casesPerOneMillion: number;
 	deathsPerOneMillion: number;
+	updated: number;
 }
 
 export interface State {
