@@ -37,7 +37,7 @@ export class NovelCovid {
 
 		} else if (sort) {
 
-			return fetch(`${this.baseURL}/countries?${sort}`).then(json);
+			return fetch(`${this.baseURL}/countries?sort=${sort}`).then(json);
 
 		}
 
