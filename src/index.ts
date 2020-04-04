@@ -67,21 +67,11 @@ export class NovelCovid {
 
 	/**
 	 * @description Fetches data of corona virus in United States.
-	 * @param {?string} [state=null] - State name data you wanna fetch.
-	 * @returns {Promise<Array<State> | State | null>}
+	 * @returns {Promise<Array<State>>}
 	 */
-	async states(): Promise<Array<State>>;
-	async states(state: string | null): Promise<State | null>;
-	async states(state?: string | null): Promise<Array<State> | State | null> {
-
-		if (state) {
-
-			return fetch(`${this.baseURL}/states/${state}`).then(json);
-
-		}
+	async states(): Promise<Array<State>> {
 
 		return fetch(`${this.baseURL}/states`).then(json);
-
 
 	}
 
