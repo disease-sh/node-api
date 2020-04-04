@@ -122,5 +122,15 @@ const track = new NovelCovid();
 ### Jhucsse
 ```js
 .jhucsse();
+
+.jhucsee(true); // Gets all the counties
+
+.jhucsee(true, 'countyname'); // for a countyname
 ```
+
+### countryName
+```js
+.countryNames(); // All the country names which are effected.
+```
+
 Thanks!

@@ -119,14 +119,13 @@ export class NovelCovid {
 	 * @description Return data from the John Hopkins CSSE Data Repository (Provinces and such).
 	 * @param {?boolean} [countries=null] - If method should return counties
 	 * @param {?string} countryname - County name if counties is true.
-	 * @returns {Promise<Array<Jhucsse>>}
+	 * @returns {Promise<Array<Jhucsse> | Array<JhucsseCounties> | null>}
 	 */
 	async jhucsse(): Promise<Array<Jhucsse>>;
-	async jhucsse(counties?: boolean | null): Promise<Array<JhucsseCounties>>;
-	async jhucsse(counties: boolean, countyname: string): Promise<JhucsseCountry>;
-	async jhucsse(counties?: boolean, countyname?: string): Promise<Array<Jhucsse> | Array<JhucsseCounties> | JhucsseCountry> {
+	async jhucsse(counties?: boolean | null, countyname?: string | null): Promise<Array<JhucsseCounties> | null>;
+	async jhucsse(counties?: boolean | null, countyname?: string | null): Promise<Array<Jhucsse> | Array<JhucsseCounties> | null> {
 
-		if (counties) {
+		if (counties && !countyname) {
 
 			return fetch(`${this.baseURL}/v2/jhucsse/counties`).then(json);
 
@@ -209,13 +208,6 @@ export interface Jhucsse {
 		latitude: string;
 		longitude: string;
 	};
-}
-
-export interface JhucsseCountry {
-	country: string;
-	province: string | null;
-	county: string;
-	updatedAt: Date;
 }
 
 export interface JhucsseCounties {
