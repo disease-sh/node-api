@@ -1,0 +1,31 @@
+{
+  "name": "covidapi",
+  "version": "1.0.0",
+  "description": "nodejs api wrapper for https://github.com/novelcovid/api",
+  "main": "index.js",
+  "dependencies": {
+    "node-fetch": "2.6.0"
+  },
+  "devDependencies": {
+    "chai": "4.2.0",
+    "mocha": "7.1.1"
+  },
+  "scripts": {
+    "test": "mocha ./index.spec.js --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/puf17640/covidapi.git"
+  },
+  "keywords": [
+    "apiwrapper",
+    "covid19",
+    "nodejs"
+  ],
+  "author": "puf17640",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/puf17640/covidapi/issues"
+  },
+  "homepage": "https://github.com/puf17640/covidapi#readme"
+}
