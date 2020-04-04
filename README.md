@@ -79,6 +79,13 @@ const track = new NovelCovid();
 ```js
 .all();
 ```
+
+### Yesterday
+
+```js
+.yesterday();
+```
+
 ### Countries
 
 ```js
@@ -94,6 +101,7 @@ const track = new NovelCovid();
 ```
 
 ### States
+
 ```js
 .states(); // For ALL states
 ```
@@ -103,6 +111,7 @@ const track = new NovelCovid();
 ```
 
 ### Historical
+
 ```js
 .historical(); // For ALL
 ```
@@ -120,6 +129,7 @@ const track = new NovelCovid();
 ```
 
 ### Jhucsse
+
 ```js
 .jhucsse();
 
@@ -129,6 +139,7 @@ const track = new NovelCovid();
 ```
 
 ### countryName
+
 ```js
 .countryNames(); // All the country names which are effected.
 ```
