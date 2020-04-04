@@ -126,7 +126,7 @@ export interface Country {
 		iso2: string;
 	};
 	cases: number;
-	todaysCases: number;
+	todayCases: number;
 	deaths: number;
 	recovered: number;
 	active: number;
