@@ -94,19 +94,20 @@ describe('JHUCSSE', function() {
 
   it('/v2/jhucsse/counties/abbeville', async function () {
     let data = await api.jhucsse.counties('abbeville')
-    data.should.be.a('array').of.length(1)
-    data = data[0]
-    data.should.have.property('country')
-    data.should.have.property('province')
-    data.should.have.property('county')
-    data.should.have.property('updatedAt')
-    data.should.have.property('stats')
-    data.stats.should.have.property('confirmed')
-    data.stats.should.have.property('deaths')
-    data.stats.should.have.property('recovered')
-    data.should.have.property('coordinates')
-    data.coordinates.should.have.property('longitude')
-    data.coordinates.should.have.property('latitude')
+    data.should.be.a('array')
+    for(let row of data){
+      row.should.have.property('country')
+      row.should.have.property('province')
+      row.should.have.property('county')
+      row.should.have.property('updatedAt')
+      row.should.have.property('stats')
+      row.stats.should.have.property('confirmed')
+      row.stats.should.have.property('deaths')
+      row.stats.should.have.property('recovered')
+      row.should.have.property('coordinates')
+      row.coordinates.should.have.property('longitude')
+      row.coordinates.should.have.property('latitude')
+    }
   })
 })
 
