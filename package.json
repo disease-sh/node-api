@@ -1,6 +1,6 @@
 {
   "name": "covidapi",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "nodejs api wrapper for https://github.com/novelcovid/api",
   "main": "index.js",
   "dependencies": {
@@ -27,5 +27,5 @@
   "bugs": {
     "url": "https://github.com/puf17640/covidapi/issues"
   },
-  "homepage": "https://github.com/puf17640/covidapi#readme"
+  "homepage": "https://github.com/puf17640/covidapi"
 }
