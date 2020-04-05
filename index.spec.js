@@ -141,7 +141,7 @@ describe('HISTORICAL', function () {
   })
 
   it('/v2/historical/china', async function () {
-    const data = await api.historical.countries('china')
+    const data = await api.historical.countries({country:'china'})
     data.should.be.a('object')
     data.should.have.property('country')
     data.should.have.property('provinces')
@@ -157,7 +157,7 @@ describe('HISTORICAL', function () {
   })
 
   it('/v2/historical/china/hubei', async function () {
-    const data = await api.historical.countries('china', 'hubei')
+    const data = await api.historical.countries({country:'china', province:'hubei'})
     data.should.be.a('object')
     data.should.have.property('country')
     data.should.have.property('province')
@@ -199,7 +199,7 @@ describe('COUNTRIES', function () {
   })
 
   it('/countries/austria', async function() {
-    const data = await api.countries('austria')
+    const data = await api.countries({country:'austria'})
     data.should.be.a('object')
     data.should.have.property('country')
     data.should.have.property('countryInfo')

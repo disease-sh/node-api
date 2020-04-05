@@ -3,13 +3,8 @@ const fetch = require('node-fetch'),
       baseUrl = 'https://corona.lmao.ninja'
 module.exports = {
   all : () => fetchJson('all'),
-  countries : (country, sort) => {
-		var path = `countries`
-      if(country)
-        path+=`/${country}`
-      if(sort)
-        path+=`?sort=${sort}`
-      return fetchJson(path)
+  countries : (opts = {}) => {
+    return fetchJson(`countries${opts.country?('/'+opts.country):''}${opts.sort?('?sort='+opts.sort):''}`)
   },
   states: () => fetchJson('states'),
   yesterday: () => fetchJson('yesterday'),
@@ -19,14 +14,8 @@ module.exports = {
   },
   historical: {
     all: () => fetchJson('v2/historical/all'),
-    countries: (country, province) => {
-      var path = `v2/historical`
-      if(country){
-        path+=`/${country}`
-        if(province)
-          path+=`/${province}`
-      }
-      return fetchJson(path)
+    countries: (opts = {}) => {
+      return fetchJson(`v2/historical${opts.country?('/'+opts.country+(opts.province?('/'+opts.province):'')):''}`)
     }
   }
 }
