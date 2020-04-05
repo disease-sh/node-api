@@ -9,7 +9,7 @@
     "lint": "eslint --ext ts src --fix",
     "test": "eslint --ext ts src"
   },
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "An Api wrapper to get information about the Novel CoronaVirus.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
