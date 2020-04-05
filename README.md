@@ -62,10 +62,10 @@ api.all().then(console.log)
 api.countries().then(console.log) 
 
 // this prints a specified country
-api.countries('austria').then(console.log) 
+api.countries({country:'austria'}).then(console.log) 
 
 // this prints an array of call infected countries sorted by todays cases
-api.countries(null, 'todayCases').then(console.log) 
+api.countries({sort:'todayCases'}).then(console.log) 
 ```
 
 ### Yesterday
@@ -101,10 +101,10 @@ api.states().then(console.log)
 api.jhucsse.all().then(console.log)
 
 // this prints an array of infected US states 
-api.jhucsse.countries().then(console.log)
+api.jhucsse.counties().then(console.log)
 
 // this prints an array of infected provinces of a specified US county 
-api.jhucsse.countries('lee').then(console.log)
+api.jhucsse.counties('lee').then(console.log)
 ```
 
 ### Historical
@@ -117,10 +117,10 @@ api.historical.all().then(console.log)
 api.historical.countries().then(console.log)
 
 // this prints a specified country and its timeline
-api.historical.countries('china').then(console.log)
+api.historical.countries({country:'china'}).then(console.log)
 
 // this prints a specified province of a specified country and its timeline
-api.historical.countries('china', 'hubei').then(console.log)
+api.historical.countries({country:'china', province:'hubei'}).then(console.log)
 ```
 
 
