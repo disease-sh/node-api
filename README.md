@@ -83,7 +83,15 @@ const track = new NovelCovid();
 ### Yesterday
 
 ```js
-.yesterday();
+.yesterday(); // for ALL.
+```
+
+```js
+.yesterday('country name'); // For Specific Country
+```
+
+```js
+.yesterday(null, 'sort by'); // For Sorting
 ```
 
 ### Countries
@@ -104,10 +112,6 @@ const track = new NovelCovid();
 
 ```js
 .states(); // For ALL states
-```
-
-```js
-.states('state name'); //  For specfic State
 ```
 
 ### Historical

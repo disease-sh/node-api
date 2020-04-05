@@ -23,9 +23,23 @@ export class NovelCovid {
 
 	/**
 	 * @description Gets yesterday's information from the api.
-	 * @returns {Promise<Array<Country>>}
+ 	 * @param {?string} [country=null] - Country details you want to fetch.
+	 * @param {?string} sort - Sort by active, deaths , etc.
+	 * @returns {Promise<Array<Country>| Country |null>}
 	 */
-	async yesterday(): Promise<Array<Country>> {
+	async yesterday(country?: string | null | number): Promise<Country | Array<Country> | null>;
+	async yesterday(country: null, sort?: keyof CountrySort): Promise<Array<Country>>;
+	async yesterday(country?: string | null | number, sort?: keyof Country): Promise<Array<Country> | Country | null> {
+
+		if (country) {
+
+			return fetch(`${this.baseURL}/yesterday/${country}`).then(json);
+
+		} else if (!country && sort) {
+
+			return fetch(`${this.baseURL}/yesterday?sort=${sort}`).then(json);
+
+		}
 
 		return fetch(`${this.baseURL}/yesterday`).then(json);
 	}
@@ -55,7 +69,7 @@ export class NovelCovid {
 
 			return fetch(`${this.baseURL}/countries/${country}`).then(json);
 
-		} else if (sort) {
+		} else if (!country && sort) {
 
 			return fetch(`${this.baseURL}/countries?sort=${sort}`).then(json);
 
