@@ -30,6 +30,17 @@ describe('DEFAULT', function () {
     }
   })
 
+  it('/states/michigan', async function () {
+    const data = await api.states({state:'michigan'})
+    data.should.be.a('object')
+    data.should.have.property('state')
+    data.should.have.property('cases')
+    data.should.have.property('todayCases')
+    data.should.have.property('deaths')
+    data.should.have.property('todayDeaths')
+    data.should.have.property('active')
+  })
+
   it('/yesterday',async function () {
     const data = await api.yesterday()
     data.should.be.a('array')
@@ -53,6 +64,29 @@ describe('DEFAULT', function () {
       row.should.have.property('deathsPerOneMillion')
       row.should.have.property('updated')
     }
+  })
+
+  it('/yesterday/austria',async function () {
+    const data = await api.yesterday({country:'austria'})
+    data.should.be.a('object')
+    data.should.have.property('country')
+    data.should.have.property('countryInfo')
+    data.countryInfo.should.have.property('_id')
+    data.countryInfo.should.have.property('iso2')
+    data.countryInfo.should.have.property('iso3')
+    data.countryInfo.should.have.property('lat')
+    data.countryInfo.should.have.property('long')
+    data.countryInfo.should.have.property('flag')
+    data.should.have.property('cases')
+    data.should.have.property('todayCases')
+    data.should.have.property('deaths')
+    data.should.have.property('todayDeaths')
+    data.should.have.property('recovered')
+    data.should.have.property('active')
+    data.should.have.property('critical')
+    data.should.have.property('casesPerOneMillion')
+    data.should.have.property('deathsPerOneMillion')
+    data.should.have.property('updated')
   })
 })
 
