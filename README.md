@@ -37,22 +37,8 @@ const api = require('covidapi');
 ### Summary
 
 ```js
+// this prints a summary of global data
 api.all().then(console.log)
-
-// this will print
-{
-  cases: 1193764,
-  todayCases: 77121,
-  deaths: 64384,
-  todayDeaths: 5214,
-  recovered: 246110,
-  active: 883270,
-  critical: 42066,
-  casesPerOneMillion: 153,
-  deathsPerOneMillion: 8.3,
-  updated: 1586034307935,
-  affectedCountries: 208
-}
 ```
 
 ### Countries
@@ -61,37 +47,42 @@ api.all().then(console.log)
 // this prints an array of all infected countries
 api.countries().then(console.log) 
 
-// this prints a specified country
-api.countries({country:'austria'}).then(console.log) 
-
 // this prints an array of call infected countries sorted by todays cases
 api.countries({sort:'todayCases'}).then(console.log) 
+
+// this prints a specified country
+api.countries({country:'austria'}).then(console.log) 
 ```
 
 ### Yesterday
 
 ```js
+// this prints a summary like .all() with yesterdays data
+api.yesterday.all().then(console.log)
+
 // this prints an array of all infected countries with yesterdays data
-api.yesterday().then(console.log)
+api.yesterday.countries().then(console.log)
+
+// this prints an array of all infected countries with yesterdays data sorted by todays cases
+api.yesterday.countries({sort:'todayCases'}).then(console.log)
+
+// this prints a specific country with yesterdays data
+api.yesterday.countries({country:'austria'}).then(console.log)
 ```
 
 ### States
 
 ```js
+// this prints an array of US states and their data
 api.states().then(console.log)
 
-// this will print
-[
-  {
-    state: 'New York',
-    cases: 113704,
-    todayCases: 10228,
-    deaths: 3565,
-    todayDeaths: 347,
-    active: 99661
-  },
-  ... more items
-]
+// this prints an array of US states and their data
+api.states({sort:'todayCases'}).then(console.log)
+
+
+// this prints a specific state and its data
+api.statest({state:'michigan'}).then(console.log)
+
 ```
 
 ### JHUCSSE

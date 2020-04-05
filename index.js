@@ -9,8 +9,11 @@ module.exports = {
   states: (opts = {}) => {
     return fetchJson(`states${opts.state?('/'+opts.state):''}${opts.sort?('?sort='+opts.sort):''}`)
   },
-  yesterday: (opts = {}) => {
-    return fetchJson(`yesterday${opts.country?('/'+opts.country):''}${opts.sort?('?sort='+opts.sort):''}`)
+  yesterday: {
+    all: () => fetchJson('yesterday/all'),
+    countries: (opts = {}) => {
+      return fetchJson(`yesterday${opts.country?('/'+opts.country):''}${opts.sort?('?sort='+opts.sort):''}`)
+    }
   },
   jhucsse: {
     all: () => fetchJson('v2/jhucsse'),

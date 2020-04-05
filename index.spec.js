@@ -33,7 +33,7 @@ describe('DEFAULT', function () {
   it('/states/michigan', async function () {
     const data = await api.states({state:'michigan'})
     data.should.be.a('object')
-    data.should.have.property('state')
+    data.should.have.property('state', 'Michigan')
     data.should.have.property('cases')
     data.should.have.property('todayCases')
     data.should.have.property('deaths')
@@ -42,7 +42,7 @@ describe('DEFAULT', function () {
   })
 
   it('/yesterday',async function () {
-    const data = await api.yesterday()
+    const data = await api.yesterday.countries()
     data.should.be.a('array')
     for(let row of data) {
       row.should.have.property('country')
@@ -66,12 +66,27 @@ describe('DEFAULT', function () {
     }
   })
 
-  it('/yesterday/austria',async function () {
-    const data = await api.yesterday({country:'austria'})
+  it('/yesterday/all', async function () {
+    const data = await api.yesterday.all()
     data.should.be.a('object')
-    data.should.have.property('country')
+    data.should.have.property('cases')
+    data.should.have.property('todayCases')
+    data.should.have.property('deaths')
+    data.should.have.property('todayDeaths')
+    data.should.have.property('recovered')
+    data.should.have.property('critical')
+    data.should.have.property('casesPerOneMillion')
+    data.should.have.property('deathsPerOneMillion')
+    data.should.have.property('updated')
+    data.should.have.property('affectedCountries')
+  })
+
+  it('/yesterday/austria',async function () {
+    const data = await api.yesterday.countries({country:'austria'})
+    data.should.be.a('object')
+    data.should.have.property('country', 'Austria')
     data.should.have.property('countryInfo')
-    data.countryInfo.should.have.property('_id')
+    data.countryInfo.should.have.property('_id', 40)
     data.countryInfo.should.have.property('iso2')
     data.countryInfo.should.have.property('iso3')
     data.countryInfo.should.have.property('lat')
@@ -130,9 +145,9 @@ describe('JHUCSSE', function() {
     let data = await api.jhucsse.counties('abbeville')
     data.should.be.a('array')
     for(let row of data){
-      row.should.have.property('country')
-      row.should.have.property('province')
-      row.should.have.property('county')
+      row.should.have.property('country', 'US')
+      row.should.have.property('province', 'South Carolina')
+      row.should.have.property('county', 'Abbeville')
       row.should.have.property('updatedAt')
       row.should.have.property('stats')
       row.stats.should.have.property('confirmed')
@@ -177,7 +192,7 @@ describe('HISTORICAL', function () {
   it('/v2/historical/china', async function () {
     const data = await api.historical.countries({country:'china'})
     data.should.be.a('object')
-    data.should.have.property('country')
+    data.should.have.property('country', 'China')
     data.should.have.property('provinces')
     data.provinces.should.be.a('array')
     data.should.have.property('timeline')
@@ -235,9 +250,9 @@ describe('COUNTRIES', function () {
   it('/countries/austria', async function() {
     const data = await api.countries({country:'austria'})
     data.should.be.a('object')
-    data.should.have.property('country')
+    data.should.have.property('country', 'Austria')
     data.should.have.property('countryInfo')
-    data.countryInfo.should.have.property('_id')
+    data.countryInfo.should.have.property('_id', 40)
     data.countryInfo.should.have.property('iso2')
     data.countryInfo.should.have.property('iso3')
     data.countryInfo.should.have.property('lat')
