@@ -11,8 +11,10 @@ describe('DEFAULT', function () {
     data.should.have.property('todayDeaths')
     data.should.have.property('recovered')
     data.should.have.property('critical')
+    data.should.have.property('tests')
     data.should.have.property('casesPerOneMillion')
     data.should.have.property('deathsPerOneMillion')
+    data.should.have.property('testsPerOneMillion')
     data.should.have.property('updated')
     data.should.have.property('affectedCountries')
   })
@@ -39,6 +41,20 @@ describe('DEFAULT', function () {
     data.should.have.property('deaths')
     data.should.have.property('todayDeaths')
     data.should.have.property('active')
+  })
+
+  it('/states/michigan|new%20york', async function () {
+    const data = await api.states({state:['michigan', 'new york']})
+    data.should.be.a('array').of.length(2)
+    data[0].should.have.property('state', 'Michigan')
+    data[1].should.have.property('state', 'New York')
+    for(let row of data){
+      row.should.have.property('cases')
+      row.should.have.property('todayCases')
+      row.should.have.property('deaths')
+      row.should.have.property('todayDeaths')
+      row.should.have.property('active')
+    }
   })
 
   it('/yesterday',async function () {
@@ -102,6 +118,32 @@ describe('DEFAULT', function () {
     data.should.have.property('casesPerOneMillion')
     data.should.have.property('deathsPerOneMillion')
     data.should.have.property('updated')
+  })
+
+  it('/yesterday/austria|usa',async function () {  
+    const data = await api.yesterday.countries({country:['austria', 'usa']})
+    data.should.be.a('array').of.length(2)
+    data[0].should.have.property('country', 'Austria')
+    data[1].should.have.property('country', 'USA')
+    for(let row of data){
+      row.should.have.property('countryInfo')
+      row.countryInfo.should.have.property('_id')
+      row.countryInfo.should.have.property('iso2')
+      row.countryInfo.should.have.property('iso3')
+      row.countryInfo.should.have.property('lat')
+      row.countryInfo.should.have.property('long')
+      row.countryInfo.should.have.property('flag')
+      row.should.have.property('cases')
+      row.should.have.property('todayCases')
+      row.should.have.property('deaths')
+      row.should.have.property('todayDeaths')
+      row.should.have.property('recovered')
+      row.should.have.property('active')
+      row.should.have.property('critical')
+      row.should.have.property('casesPerOneMillion')
+      row.should.have.property('deathsPerOneMillion')
+      row.should.have.property('updated')
+    }
   })
 })
 
@@ -218,6 +260,24 @@ describe('HISTORICAL', function () {
     data.timeline.deaths.should.be.a('object')
     data.timeline.should.have.property('recovered')
     data.timeline.recovered.should.be.a('object')
+  })
+
+  it('/v2/historical/china/hubei|anhui', async function () {
+    const data = await api.historical.countries({country:'china', province:['hubei', 'anhui']})
+    data.should.be.a('array')
+    data[0].should.have.property('province', 'hubei')
+    data[1].should.have.property('province', 'anhui')
+    for(let row of data){
+      row.should.have.property('country', 'China')
+      row.should.have.property('timeline')
+      row.timeline.should.be.a('object')
+      row.timeline.should.have.property('cases')
+      row.timeline.cases.should.be.a('object')
+      row.timeline.should.have.property('deaths')
+      row.timeline.deaths.should.be.a('object')
+      row.timeline.should.have.property('recovered')
+      row.timeline.recovered.should.be.a('object')
+    }
   })
 })
 

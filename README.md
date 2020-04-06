@@ -91,7 +91,7 @@ api.statest({state:'michigan'}).then(console.log)
 // this prints an array of infected countries
 api.jhucsse.all().then(console.log)
 
-// this prints an array of infected US states 
+// this prints an array of infected US counties 
 api.jhucsse.counties().then(console.log)
 
 // this prints an array of infected provinces of a specified US county 
