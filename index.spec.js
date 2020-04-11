@@ -1,5 +1,5 @@
-const should = require('chai').should(),
-      api = require('./')
+const api = require('./')
+require('chai').should()
 
 describe('DEFAULT', function () {
   it('/all', async function () {
@@ -32,6 +32,22 @@ describe('DEFAULT', function () {
     }
   })
 
+  it('/states?sort=cases', async function () {
+    const data = await api.states({sort:'cases'})
+    data.should.be.a('array')
+    let maxCases = 999999999;
+    for(let row of data) {
+      row.should.have.property('state')
+      row.should.have.property('cases')
+      row.cases.should.be.at.most(maxCases);
+      maxCases = row.cases;
+      row.should.have.property('todayCases')
+      row.should.have.property('deaths')
+      row.should.have.property('todayDeaths')
+      row.should.have.property('active')
+    }
+  })
+
   it('/states/michigan', async function () {
     const data = await api.states({state:'michigan'})
     data.should.be.a('object')
@@ -57,6 +73,131 @@ describe('DEFAULT', function () {
     }
   })
 
+  it('/countries', async function() {
+    const data = await api.countries()
+    data.should.be.a('array')
+    for(let row of data) {
+      row.should.have.property('country')
+      row.should.have.property('countryInfo')
+      row.countryInfo.should.have.property('_id')
+      row.countryInfo.should.have.property('iso2')
+      row.countryInfo.should.have.property('iso3')
+      row.countryInfo.should.have.property('lat')
+      row.countryInfo.should.have.property('long')
+      row.countryInfo.should.have.property('flag')
+      row.should.have.property('cases')
+      row.should.have.property('todayCases')
+      row.should.have.property('deaths')
+      row.should.have.property('todayDeaths')
+      row.should.have.property('recovered')
+      row.should.have.property('active')
+      row.should.have.property('critical')
+      row.should.have.property('casesPerOneMillion')
+      row.should.have.property('deathsPerOneMillion')
+      row.should.have.property('updated')
+    }
+  })
+
+  it('/countries?sort=cases', async function() {
+    const data = await api.countries({sort:'cases'})
+    data.should.be.a('array')
+    let maxCases = 999999999;
+    for(let row of data) {
+      row.should.have.property('country')
+      row.should.have.property('countryInfo')
+      row.countryInfo.should.have.property('_id')
+      row.countryInfo.should.have.property('iso2')
+      row.countryInfo.should.have.property('iso3')
+      row.countryInfo.should.have.property('lat')
+      row.countryInfo.should.have.property('long')
+      row.countryInfo.should.have.property('flag')
+      row.should.have.property('cases')
+      row.cases.should.be.at.most(maxCases);
+      maxCases = row.cases;
+      row.should.have.property('todayCases')
+      row.should.have.property('deaths')
+      row.should.have.property('todayDeaths')
+      row.should.have.property('recovered')
+      row.should.have.property('active')
+      row.should.have.property('critical')
+      row.should.have.property('casesPerOneMillion')
+      row.should.have.property('deathsPerOneMillion')
+      row.should.have.property('updated')
+    }
+  })
+
+  it('/countries/austria', async function() {
+    const data = await api.countries({country:'austria'})
+    data.should.be.a('object')
+    data.should.have.property('country', 'Austria')
+    data.should.have.property('countryInfo')
+    data.countryInfo.should.have.property('_id', 40)
+    data.countryInfo.should.have.property('iso2')
+    data.countryInfo.should.have.property('iso3')
+    data.countryInfo.should.have.property('lat')
+    data.countryInfo.should.have.property('long')
+    data.countryInfo.should.have.property('flag')
+    data.should.have.property('cases')
+    data.should.have.property('todayCases')
+    data.should.have.property('deaths')
+    data.should.have.property('todayDeaths')
+    data.should.have.property('recovered')
+    data.should.have.property('active')
+    data.should.have.property('critical')
+    data.should.have.property('casesPerOneMillion')
+    data.should.have.property('deathsPerOneMillion')
+    data.should.have.property('updated')
+  })
+
+  it('/countries/netherlands?strict=true',async function () {
+    const data = await api.countries({country:'netherlands', strict:true})
+    data.should.be.a('object')
+    data.should.have.property('country', 'Netherlands')
+    data.should.have.property('countryInfo')
+    data.countryInfo.should.have.property('_id')
+    data.countryInfo.should.have.property('iso2')
+    data.countryInfo.should.have.property('iso3')
+    data.countryInfo.should.have.property('lat')
+    data.countryInfo.should.have.property('long')
+    data.countryInfo.should.have.property('flag')
+    data.should.have.property('cases')
+    data.should.have.property('todayCases')
+    data.should.have.property('deaths')
+    data.should.have.property('todayDeaths')
+    data.should.have.property('recovered')
+    data.should.have.property('active')
+    data.should.have.property('critical')
+    data.should.have.property('casesPerOneMillion')
+    data.should.have.property('deathsPerOneMillion')
+    data.should.have.property('updated')
+  })
+
+  it('/countries/austria|usa', async function() {
+    const data = await api.countries({country:['austria', 'usa']})
+    data.should.be.a('array').of.length(2)
+    data[0].should.have.property('country', 'Austria')
+    data[1].should.have.property('country', 'USA')
+    for(let row of data){
+      row.should.have.property('countryInfo')
+      row.countryInfo.should.have.property('_id')
+      row.countryInfo.should.have.property('iso2')
+      row.countryInfo.should.have.property('iso3')
+      row.countryInfo.should.have.property('lat')
+      row.countryInfo.should.have.property('long')
+      row.countryInfo.should.have.property('flag')
+      row.should.have.property('cases')
+      row.should.have.property('todayCases')
+      row.should.have.property('deaths')
+      row.should.have.property('todayDeaths')
+      row.should.have.property('recovered')
+      row.should.have.property('active')
+      row.should.have.property('critical')
+      row.should.have.property('casesPerOneMillion')
+      row.should.have.property('deathsPerOneMillion')
+      row.should.have.property('updated')
+    }
+  })
+
   it('/yesterday',async function () {
     const data = await api.yesterday.countries()
     data.should.be.a('array')
@@ -70,6 +211,34 @@ describe('DEFAULT', function () {
       row.countryInfo.should.have.property('long')
       row.countryInfo.should.have.property('flag')
       row.should.have.property('cases')
+      row.should.have.property('todayCases')
+      row.should.have.property('deaths')
+      row.should.have.property('todayDeaths')
+      row.should.have.property('recovered')
+      row.should.have.property('active')
+      row.should.have.property('critical')
+      row.should.have.property('casesPerOneMillion')
+      row.should.have.property('deathsPerOneMillion')
+      row.should.have.property('updated')
+    }
+  })
+
+  it('/yesterday?sort=cases', async function() {
+    const data = await api.yesterday.countries({sort:'cases'})
+    data.should.be.a('array')
+    let maxCases = 999999999;
+    for(let row of data) {
+      row.should.have.property('country')
+      row.should.have.property('countryInfo')
+      row.countryInfo.should.have.property('_id')
+      row.countryInfo.should.have.property('iso2')
+      row.countryInfo.should.have.property('iso3')
+      row.countryInfo.should.have.property('lat')
+      row.countryInfo.should.have.property('long')
+      row.countryInfo.should.have.property('flag')
+      row.should.have.property('cases')
+      row.cases.should.be.at.most(maxCases);
+      maxCases = row.cases;
       row.should.have.property('todayCases')
       row.should.have.property('deaths')
       row.should.have.property('todayDeaths')
@@ -103,6 +272,29 @@ describe('DEFAULT', function () {
     data.should.have.property('country', 'Austria')
     data.should.have.property('countryInfo')
     data.countryInfo.should.have.property('_id', 40)
+    data.countryInfo.should.have.property('iso2')
+    data.countryInfo.should.have.property('iso3')
+    data.countryInfo.should.have.property('lat')
+    data.countryInfo.should.have.property('long')
+    data.countryInfo.should.have.property('flag')
+    data.should.have.property('cases')
+    data.should.have.property('todayCases')
+    data.should.have.property('deaths')
+    data.should.have.property('todayDeaths')
+    data.should.have.property('recovered')
+    data.should.have.property('active')
+    data.should.have.property('critical')
+    data.should.have.property('casesPerOneMillion')
+    data.should.have.property('deathsPerOneMillion')
+    data.should.have.property('updated')
+  })
+
+  it('/yesterday/netherlands?strict=true',async function () {
+    const data = await api.yesterday.countries({country:'netherlands', strict:true})
+    data.should.be.a('object')
+    data.should.have.property('country', 'Netherlands')
+    data.should.have.property('countryInfo')
+    data.countryInfo.should.have.property('_id')
     data.countryInfo.should.have.property('iso2')
     data.countryInfo.should.have.property('iso3')
     data.countryInfo.should.have.property('lat')
@@ -184,7 +376,7 @@ describe('JHUCSSE', function() {
   })
 
   it('/v2/jhucsse/counties/abbeville', async function () {
-    let data = await api.jhucsse.counties('abbeville')
+    let data = await api.jhucsse.counties({county:'abbeville'})
     data.should.be.a('array')
     for(let row of data){
       row.should.have.property('country', 'US')
@@ -199,6 +391,35 @@ describe('JHUCSSE', function() {
       row.coordinates.should.have.property('longitude')
       row.coordinates.should.have.property('latitude')
     }
+  })
+
+  it('/v2/jhucsse/counties/abbeville|acadia', async function () {
+    let data = await api.jhucsse.counties({county:['abbeville','acadia']})
+    data.should.be.a('object')
+    data.should.have.property('abbeville')
+    data.should.have.property('acadia')
+    data.abbeville[0].should.have.property('country', 'US')
+    data.abbeville[0].should.have.property('province', 'South Carolina')
+    data.abbeville[0].should.have.property('county', 'Abbeville')
+    data.abbeville[0].should.have.property('updatedAt')
+    data.abbeville[0].should.have.property('stats')
+    data.abbeville[0].stats.should.have.property('confirmed')
+    data.abbeville[0].stats.should.have.property('deaths')
+    data.abbeville[0].stats.should.have.property('recovered')
+    data.abbeville[0].should.have.property('coordinates')
+    data.abbeville[0].coordinates.should.have.property('longitude')
+    data.abbeville[0].coordinates.should.have.property('latitude')
+    data.acadia[0].should.have.property('country', 'US')
+    data.acadia[0].should.have.property('province', 'Louisiana')
+    data.acadia[0].should.have.property('county', 'Acadia')
+    data.acadia[0].should.have.property('updatedAt')
+    data.acadia[0].should.have.property('stats')
+    data.acadia[0].stats.should.have.property('confirmed')
+    data.acadia[0].stats.should.have.property('deaths')
+    data.acadia[0].stats.should.have.property('recovered')
+    data.acadia[0].should.have.property('coordinates')
+    data.acadia[0].coordinates.should.have.property('longitude')
+    data.acadia[0].coordinates.should.have.property('latitude')
   })
 })
 
@@ -247,6 +468,25 @@ describe('HISTORICAL', function () {
     data.timeline.recovered.should.be.a('object')
   })
 
+  it('/v2/historical/china?lastdays=10', async function () {
+    const data = await api.historical.countries({country:'china', days:10})
+    data.should.be.a('object')
+    data.should.have.property('country', 'China')
+    data.should.have.property('provinces')
+    data.provinces.should.be.a('array')
+    data.should.have.property('timeline')
+    data.timeline.should.be.a('object')
+    data.timeline.should.have.property('cases')
+    data.timeline.cases.should.be.a('object')
+    Object.keys(data.timeline.cases).length.should.be.equal(10);
+    data.timeline.should.have.property('deaths')
+    data.timeline.deaths.should.be.a('object')
+    Object.keys(data.timeline.deaths).length.should.be.equal(10);
+    data.timeline.should.have.property('recovered')
+    data.timeline.recovered.should.be.a('object')
+    Object.keys(data.timeline.recovered).length.should.be.equal(10);
+  })
+
   it('/v2/historical/china/hubei', async function () {
     const data = await api.historical.countries({country:'china', province:'hubei'})
     data.should.be.a('object')
@@ -278,55 +518,5 @@ describe('HISTORICAL', function () {
       row.timeline.should.have.property('recovered')
       row.timeline.recovered.should.be.a('object')
     }
-  })
-})
-
-describe('COUNTRIES', function () {
-  it('/countries', async function() {
-    const data = await api.countries()
-    data.should.be.a('array')
-    for(let row of data) {
-      row.should.have.property('country')
-      row.should.have.property('countryInfo')
-      row.countryInfo.should.have.property('_id')
-      row.countryInfo.should.have.property('iso2')
-      row.countryInfo.should.have.property('iso3')
-      row.countryInfo.should.have.property('lat')
-      row.countryInfo.should.have.property('long')
-      row.countryInfo.should.have.property('flag')
-      row.should.have.property('cases')
-      row.should.have.property('todayCases')
-      row.should.have.property('deaths')
-      row.should.have.property('todayDeaths')
-      row.should.have.property('recovered')
-      row.should.have.property('active')
-      row.should.have.property('critical')
-      row.should.have.property('casesPerOneMillion')
-      row.should.have.property('deathsPerOneMillion')
-      row.should.have.property('updated')
-    }
-  })
-
-  it('/countries/austria', async function() {
-    const data = await api.countries({country:'austria'})
-    data.should.be.a('object')
-    data.should.have.property('country', 'Austria')
-    data.should.have.property('countryInfo')
-    data.countryInfo.should.have.property('_id', 40)
-    data.countryInfo.should.have.property('iso2')
-    data.countryInfo.should.have.property('iso3')
-    data.countryInfo.should.have.property('lat')
-    data.countryInfo.should.have.property('long')
-    data.countryInfo.should.have.property('flag')
-    data.should.have.property('cases')
-    data.should.have.property('todayCases')
-    data.should.have.property('deaths')
-    data.should.have.property('todayDeaths')
-    data.should.have.property('recovered')
-    data.should.have.property('active')
-    data.should.have.property('critical')
-    data.should.have.property('casesPerOneMillion')
-    data.should.have.property('deathsPerOneMillion')
-    data.should.have.property('updated')
   })
 })

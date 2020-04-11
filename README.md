@@ -28,6 +28,8 @@ npm i -s covidapi
 
 All shown examples use Promises but can also await/async to fetch data using covidapi.
 
+Since 0.1.0, only /v2 endpoints are supported. Keep that in mind.
+
 ### Add to project 
 
 ```js
@@ -39,6 +41,9 @@ const api = require('covidapi');
 ```js
 // this prints a summary of global data
 api.all().then(console.log)
+
+// this prints a summary of global data with yesterdays data
+api.yesterday.all().then(console.log)
 ```
 
 ### Countries
@@ -47,27 +52,30 @@ api.all().then(console.log)
 // this prints an array of all infected countries
 api.countries().then(console.log) 
 
-// this prints an array of call infected countries sorted by todays cases
-api.countries({sort:'todayCases'}).then(console.log) 
+// this prints an array of call infected countries sorted by cases
+api.countries({sort:'cases'}).then(console.log) 
 
 // this prints a specified country
 api.countries({country:'austria'}).then(console.log) 
+
+// this prints an array of specified countries
+api.countries({country:['austria','china']}).then(console.log) 
 ```
 
 ### Yesterday
 
 ```js
-// this prints a summary like .all() with yesterdays data
-api.yesterday.all().then(console.log)
-
 // this prints an array of all infected countries with yesterdays data
 api.yesterday.countries().then(console.log)
 
 // this prints an array of all infected countries with yesterdays data sorted by todays cases
-api.yesterday.countries({sort:'todayCases'}).then(console.log)
+api.yesterday.countries({sort:'cases'}).then(console.log)
 
-// this prints a specific country with yesterdays data
+// this prints a specified country with yesterdays data
 api.yesterday.countries({country:'austria'}).then(console.log)
+
+// this prints an array of specified countries with yesterdays data
+api.yesterday.countries({country:['austria','china']}).then(console.log)
 ```
 
 ### States
@@ -76,13 +84,14 @@ api.yesterday.countries({country:'austria'}).then(console.log)
 // this prints an array of US states and their data
 api.states().then(console.log)
 
-// this prints an array of US states and their data
-api.states({sort:'todayCases'}).then(console.log)
+// this prints an array of US states and their data sorted by cases
+api.states({sort:'cases'}).then(console.log)
 
-
-// this prints a specific state and its data
+// this prints a specified state and its data
 api.statest({state:'michigan'}).then(console.log)
 
+// this prints an array of specified states and their data
+api.statest({state:['michigan','new york']}).then(console.log)
 ```
 
 ### JHUCSSE
@@ -95,7 +104,10 @@ api.jhucsse.all().then(console.log)
 api.jhucsse.counties().then(console.log)
 
 // this prints an array of infected provinces of a specified US county 
-api.jhucsse.counties('lee').then(console.log)
+api.jhucsse.counties({county:'abbeville'}).then(console.log)
+
+// this prints an object with the counties provinces as arrays
+api.jhucsse.counties({county:['abbeville','acadia']}).then(console.log)
 ```
 
 ### Historical
@@ -110,8 +122,14 @@ api.historical.countries().then(console.log)
 // this prints a specified country and its timeline
 api.historical.countries({country:'china'}).then(console.log)
 
+// this prints a specified country and its timeline for the last 10 days
+api.historical.countries({country:'china', days:10}).then(console.log)
+
 // this prints a specified province of a specified country and its timeline
 api.historical.countries({country:'china', province:'hubei'}).then(console.log)
+
+// this prints a specified province of a specified country and its timeline
+api.historical.countries({country:'china', province:['hubei','anhui']}).then(console.log)
 ```
 
 
