@@ -151,6 +151,14 @@ export interface All {
 	recovered: number;
 	updated: number;
 	active: number;
+	todayCases: number;
+	todayDeaths: number;
+	critical: number;
+	casesPerOneMillion: number;
+	deathsPerOneMillion: number;
+	tests: number;
+	testsPerOneMillion: number;
+	affectedCountries: number;
 }
 
 export interface Country {
@@ -166,12 +174,15 @@ export interface Country {
 	cases: number;
 	todayCases: number;
 	deaths: number;
+	todayDeaths: number;
 	recovered: number;
 	active: number;
 	critical: number;
 	casesPerOneMillion: number;
 	deathsPerOneMillion: number;
 	updated: number;
+	tests: number;
+	testsPerOneMillion: number;
 }
 
 export interface State {
@@ -181,33 +192,27 @@ export interface State {
 	deaths: number;
 	todayDeaths: number;
 	active: number;
+	tests: number;
+	testsPerOneMillion: number;
 }
 
 export interface Historical {
 	country: string;
 	province: string | null;
-	timeline: {
-		cases: object;
-		deaths: object;
-	};
+	timeline: Stats<object>;
 }
 
 export interface HistoricalCountry {
 	country: string;
-	timeline: {
-		cases: object;
-		deaths: object;
-	};
+	provinces: string[] | null;
+	timeline: Stats<object>;
 }
+
 export interface Jhucsse {
 	country: string;
 	province: Array<string> | string | null;
 	updatedAt: Date;
-	stats: {
-		confirmed: number;
-		deaths: number;
-		recovered: number;
-	};
+	stats: Stats<number>;
 	coordinates: {
 		latitude: string;
 		longitude: string;
@@ -219,11 +224,7 @@ export interface JhucsseCounties {
 	province: string | null;
 	updatedAt: Date;
 	county: string;
-	stats: {
-		confirmed: number;
-		deaths: number;
-		recovered: number;
-	};
+	stats: Stats<number>;
 	coordinates: {
 		latitude: string;
 		longitude: string;
@@ -241,8 +242,10 @@ export interface CountrySort {
 	deathsPerOneMillion: number;
 }
 
-export interface HistoricalAll {
-	cases: object;
-	deaths: object;
-	recovered: object;
+export interface HistoricalAll extends Stats<object> {}
+
+export interface Stats<T> {
+	confirmed: T;
+	deaths: T;
+	recovered: T;
 }
