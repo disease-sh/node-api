@@ -337,6 +337,60 @@ describe('DEFAULT', function () {
       row.should.have.property('updated')
     }
   })
+
+  it('/yesterday/states', async function () {
+    const data = await api.yesterday.states()
+    data.should.be.a('array')
+    for(let row of data) {
+      row.should.have.property('state')
+      row.should.have.property('cases')
+      row.should.have.property('todayCases')
+      row.should.have.property('deaths')
+      row.should.have.property('todayDeaths')
+      row.should.have.property('active')
+    }
+  })
+
+  it('/yesterday/states?sort=cases', async function () {
+    const data = await api.yesterday.states({sort:'cases'})
+    data.should.be.a('array')
+    let maxCases = 999999999;
+    for(let row of data) {
+      row.should.have.property('state')
+      row.should.have.property('cases')
+      row.cases.should.be.at.most(maxCases);
+      maxCases = row.cases;
+      row.should.have.property('todayCases')
+      row.should.have.property('deaths')
+      row.should.have.property('todayDeaths')
+      row.should.have.property('active')
+    }
+  })
+
+  it('/yesterday/states/michigan', async function () {
+    const data = await api.yesterday.states({state:'michigan'})
+    data.should.be.a('object')
+    data.should.have.property('state', 'Michigan')
+    data.should.have.property('cases')
+    data.should.have.property('todayCases')
+    data.should.have.property('deaths')
+    data.should.have.property('todayDeaths')
+    data.should.have.property('active')
+  })
+
+  it('/yesterday/states/michigan|new%20york', async function () {
+    const data = await api.yesterday.states({state:['michigan', 'new york']})
+    data.should.be.a('array').of.length(2)
+    data[0].should.have.property('state', 'Michigan')
+    data[1].should.have.property('state', 'New York')
+    for(let row of data){
+      row.should.have.property('cases')
+      row.should.have.property('todayCases')
+      row.should.have.property('deaths')
+      row.should.have.property('todayDeaths')
+      row.should.have.property('active')
+    }
+  })
 })
 
 describe('JHUCSSE', function() {

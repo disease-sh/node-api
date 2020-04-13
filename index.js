@@ -13,13 +13,13 @@ module.exports = {
         path += `sort=${opts.sort}`
       }
       if(opts.strict) {
-        path += '&strict=true'
+        path += (opts.sort?'&':'')+'strict=true'
       }
     }
     return fetchJson(path)
   },
   states: (opts = {}) => {
-    let path = 'states'
+    let path = 'v2/states'
     if(opts.state) 
       path += `/${Array.isArray(opts.state) ? (opts.state.join('|')) : opts.state}`
     if(opts.sort || opts.strict) {
@@ -28,7 +28,7 @@ module.exports = {
         path += `sort=${opts.sort}`
       }
       if(opts.strict) {
-        path += 'strict=true'
+        path += (opts.sort?'&':'')+'strict=true'
       }
     }
     return fetchJson(path)
@@ -45,10 +45,25 @@ module.exports = {
           path += `sort=${opts.sort}`
         }
         if(opts.strict) {
-          path += '&strict=true'
+          path += (opts.sort?'&':'')+'strict=true'
         }
       }
       return fetchJson(path)
+    },
+    states: (opts = {}) => {
+      let path = 'v2/states'
+    if(opts.state) 
+      path += `/${Array.isArray(opts.state) ? (opts.state.join('|')) : opts.state}`
+    if(opts.sort || opts.strict) {
+      path += '?yesterday=true&'
+      if(opts.sort) {
+        path += `sort=${opts.sort}`
+      }
+      if(opts.strict) {
+        path += (opts.sort?'&':'')+'strict=true'
+      }
+    }
+    return fetchJson(path)
     }
   },
   jhucsse: {
