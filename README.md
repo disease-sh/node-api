@@ -78,6 +78,32 @@ api.yesterday.countries({country:'austria'}).then(console.log)
 api.yesterday.countries({country:['austria','china']}).then(console.log)
 ```
 
+### Continents
+
+```js
+// this prints an array of all infected continents
+api.continents().then(console.log) 
+
+// this prints an array of all infected continents sorted by cases
+api.continents({sort:'cases'}).then(console.log) 
+
+// this prints a specified continent
+api.continents({continent:'europe'}).then(console.log)
+```
+
+### Yesterday (Continents)
+
+```js
+// this prints an array of all infected continents with yesterdays data
+api.yesterday.continents().then(console.log)
+
+// this prints an array of all infected continents with yesterdays data sorted by todays cases
+api.yesterday.continents({sort:'cases'}).then(console.log)
+
+// this prints a specified continent with yesterdays data
+api.yesterday.continents({continent:'europe'}).then(console.log)
+```
+
 ### States
 
 ```js
@@ -88,10 +114,10 @@ api.states().then(console.log)
 api.states({sort:'cases'}).then(console.log)
 
 // this prints a specified state and its data
-api.statest({state:'michigan'}).then(console.log)
+api.states({state:'michigan'}).then(console.log)
 
 // this prints an array of specified states and their data
-api.statest({state:['michigan','new york']}).then(console.log)
+api.states({state:['michigan','new york']}).then(console.log)
 ```
 
 ### Yesterday (States)
@@ -104,10 +130,10 @@ api.yesterday.states().then(console.log)
 api.yesterday.states({sort:'cases'}).then(console.log)
 
 // this prints a specified state with yesterdays data
-api.yesterday.statest({state:'michigan'}).then(console.log)
+api.yesterday.states({state:'michigan'}).then(console.log)
 
 // this prints an array of specified states with yesterdays data
-api.yesterday.statest({state:['michigan','new york']}).then(console.log)
+api.yesterday.states({state:['michigan','new york']}).then(console.log)
 ```
 
 ### JHUCSSE
