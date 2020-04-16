@@ -9,7 +9,7 @@ export class NovelCovid {
 
 	public constructor() {
 
-		this.baseURL = 'https://corona.lmao.ninja';
+		this.baseURL = 'https://corona.lmao.ninja/v2';
 	}
 
 	/**
