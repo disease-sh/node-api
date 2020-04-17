@@ -72,6 +72,24 @@ import { NovelCovid } from 'novelcovid';
 const track = new NovelCovid();
 ```
 
+## or 
+
+JavaScript:
+
+```js
+const NovelCovid = require('novelcovid');
+
+const track = new NovelCovid();
+```
+
+TypeScript:
+
+```ts
+import NovelCovid from 'novelcovid';
+
+const track = new NovelCovid();
+```
+
 ## Methods
 
 ### All
@@ -80,18 +98,8 @@ const track = new NovelCovid();
 .all();
 ```
 
-### Yesterday
-
 ```js
-.yesterday(); // for ALL.
-```
-
-```js
-.yesterday('country name'); // For Specific Country
-```
-
-```js
-.yesterday(null, 'sort by'); // For Sorting
+.all({ yesterday: true });
 ```
 
 ### Countries
@@ -105,13 +113,55 @@ const track = new NovelCovid();
 ```
 
 ```js
-.countries(null, 'sort by'); // For Sorting
+.countries(null, { sort: 'value' }); // For Sorting
+```
+
+```js
+.countries(null, { sort: 'value', yesterday: true|false|1|0 }); // For Sorting and yesterday data.
+```
+
+```js
+.countries(null, { strict: true|false }); // For Strict
+```
+
+```js
+.countries(null, { yesterday: true|false|1|0 }); // For yesterday data.
+```
+
+```js
+.countries(null, { yesterday: true|false|1|0, strict: true|false }); // For yesterday data and strict.
 ```
 
 ### States
 
 ```js
 .states(); // For ALL states
+```
+
+```js
+.states('state') // For specific State.
+```
+
+```js
+.states(null, { sort: 'value' }); // for sorting.
+```
+
+```js
+.states(null, { yesterday: 'value' }); // for yesterday data.
+```
+
+```js
+.states('state', { yesterday: true }); // for specific state and yesterday data.
+```
+
+### HistoricalUSA
+
+```js
+.historicalUSA(); // for all
+```
+
+```js
+.historicalUSA('county'); // for a county;
 ```
 
 ### Historical
@@ -145,7 +195,46 @@ const track = new NovelCovid();
 ### countryName
 
 ```js
-.countryNames(); // All the country names which are effected.
+.countryNames(); // All the country names which are affected.
 ```
+
+### Continents
+
+```js
+.continents(); // For all.
+```
+
+```js
+.continents('continent'); // for a specific continent
+```
+
+### Same thing as countries, it has options
+
+```js
+.continents('continent'|null, { yesterday: true|false|1|0, strict: true|false, sort: 'value'})
+```
+
+### nyt
+
+```js
+.nytState()
+```
+
+```js
+.nytState('state'); // for a state
+```
+
+```js
+.nytCounties()
+```
+
+```js
+.nytCounties('county'); // for a county
+```
+
+```js
+.nytUSA();
+```
+
 
 Thanks!

@@ -32,7 +32,7 @@ export class NovelCovid {
 
 	/**
 	 * @description Gets all the affected country names.
-	 * @returns {Promise<Array<String>>}
+	 * @returns {Promise<Array<string>>}
 	 */
 	async countryNames(): Promise<Array<string>> {
 
@@ -44,7 +44,7 @@ export class NovelCovid {
 	 * @description Fetches data of corona virus by country.
 	 * @param {?string} [country=null] - Country details you want to fetch.
 	 * @param {CountryOptions} options - options for country.
-	 * @returns {Promise<Array<Country>| Country |null>}
+	 * @returns {Promise<Array<Country>| Country>}
 	 */
 	async countries(country?: string | number, options?: CountryOptions): Promise<Array<Country> | Country>;
 	async countries(country: null, options?: CountryOptions): Promise<Array<Country>>;
@@ -133,6 +133,7 @@ export class NovelCovid {
 	 * @description Shows information as per continent.
 	 * @param {?string} continent - For a continent.
 	 * @param {?ContinentOptions} options - Options for continent.
+	 * @returns {Promise<Array<Continent> | Continent | ContinentE>}
 	 */
 	async continents(continent?: string | null): Promise<ContinentE>;
 	async continents(continent?: string | null, options?: ContinentOptions): Promise<Array<Continent> | Continent>;
@@ -177,44 +178,61 @@ export class NovelCovid {
 	}
 
 	/**
+	 * @description - Get historical data of USA.
+	 * @param {?string} state - For a specfic state.
+	 * @returns {Promise<Array<string> | Array<HistoricalUSA>>}
+	 */
+	async historicalUSA(): Promise<Array<string>>;
+	async historicalUSA(state: string): Promise<Array<HistoricalUSA>>;
+	async historicalUSA(state?: string): Promise<Array<HistoricalUSA> | Array<string>> {
+
+		if (state) {
+
+			return fetch(`${this.baseURL}/historical/usacounties/${state}`).then(json);
+		}
+
+		return fetch(`${this.baseURL}/historical/usacounties`).then(json);
+	}
+
+	/**
 	 * @description Get historical data from the start of 2020. (JHU CSSE GISand Data).
 	 * @param {?boolean} [all=null] - Returns  all the cases and deaths.
 	 * @param {?string} [country=null] -  Returns data of a specific country.
 	 * @param {?string} [province=null] - Get a province within a country's time series.
-	 * @returns {Promise<Array<Historical> | HistoricalAll | HistoricalCountry | Array<HistoricalCountry> | null>}
+	 * @returns {Promise<Array<Historical> | HistoricalAll | HistoricalCountry | Array<HistoricalCountry>>}
 	 */
 	async historical(): Promise<Array<Historical>>;
 	async historical(all?: boolean | null): Promise<HistoricalAll>;
-	async historical(all: null, country: string | null, province?: string | null): Promise<HistoricalCountry | Array<HistoricalCountry> | null>;
-	async historical(all?: boolean | null, country?: string | null, province?: string | null): Promise<Array<Historical> | HistoricalCountry | Array<HistoricalCountry> | HistoricalAll | null> {
+	async historical(all: null, country: string | null, province?: string | null): Promise<HistoricalCountry | Array<HistoricalCountry>>;
+	async historical(all?: boolean | null, country?: string | null, province?: string | null): Promise<Array<Historical | HistoricalCountry> | HistoricalCountry | HistoricalAll> {
 
 		if (country && !province && !all) {
 
-			return fetch(`${this.baseURL}/v2/historical/${country}`).then(json);
+			return fetch(`${this.baseURL}/historical/${country}`).then(json);
 
 		} else if (country && province && !all) {
 
-			return fetch(`${this.baseURL}/v2/historical/${country}/${province}`).then(json);
+			return fetch(`${this.baseURL}/historical/${country}/${province}`).then(json);
 
 		} else if (all) {
 
-			return fetch(`${this.baseURL}/v2/historical/all`).then(json);
+			return fetch(`${this.baseURL}/historical/all`).then(json);
 
 		}
 
-		return fetch(`${this.baseURL}/v2/historical`).then(json);
+		return fetch(`${this.baseURL}/historical`).then(json);
 
 	}
 
 	/**
 	 * @description Return data from the John Hopkins CSSE Data Repository (Provinces and such).
 	 * @param {?boolean} [countries=null] - If method should return counties
-	 * @param {?string} countryname - County name if counties is true.
-	 * @returns {Promise<Array<Jhucsse> | Array<JhucsseCounties> | null>}
+	 * @param {?string} countryname - for a specific County.
+	 * @returns {Promise<Array<Jhucsse> | Array<JhucsseCounties>>}
 	 */
 	async jhucsse(): Promise<Array<Jhucsse>>;
-	async jhucsse(counties?: boolean | null, countyname?: string | null): Promise<Array<JhucsseCounties> | null>;
-	async jhucsse(counties?: boolean | null, countyname?: string | null): Promise<Array<Jhucsse> | Array<JhucsseCounties> | null> {
+	async jhucsse(counties?: boolean | null, countyname?: string | null): Promise<Array<JhucsseCounties>>;
+	async jhucsse(counties?: boolean | null, countyname?: string | null): Promise<Array<Jhucsse | JhucsseCounties>> {
 
 		if (counties && !countyname) {
 
@@ -230,6 +248,73 @@ export class NovelCovid {
 
 	}
 
+	/**
+	 * @description - Return all NYT state data or individual state data if specified. Each entry returned represents data for a given day.
+	 * @param {?string} state - Specfic State.
+	 * @returns {Promise<Array<NytState>>}
+	 */
+	async nytState(state?: string): Promise<Array<NytState>> {
+
+		if (state) {
+
+			return fetch(`${this.baseURL}/nyt/states/${state}`).then(json);
+
+		}
+
+		return fetch(`${this.baseURL}/nyt/states`).then(json);
+
+	}
+
+	/**
+	 * @description - Return all NYT county data or individual county data if specified. Each entry returned represents data for a given day.
+	 * @param {?string} county - Specfic county.
+	 * @returns {Promise<Array<NytCounties>>}
+	 */
+	async nytCounties(county?: string): Promise<Array<NytCounties>> {
+
+		if (county) {
+
+			return fetch(`${this.baseURL}/nyt/counties/${county}`).then(json);
+
+		}
+
+		return fetch(`${this.baseURL}/nyt/counties`).then(json);
+
+	}
+
+	/**
+	 * @description - Return all NYT US nationwide data. Each entry returned represents data for a given day.
+	 * @returns {Promise<Array<NytUSA>>}
+	 */
+	async nytUSA(): Promise<Array<NytUSA>> {
+
+		return fetch(`${this.baseURL}/nyt/usa`).then(json);
+
+	}
+
+}
+
+export interface NytUSA {
+	date: string;
+	cases: number;
+	deaths: number;
+}
+
+export interface NytCounties {
+	date: string;
+	county: string | null;
+	state: string;
+	fips: number;
+	cases: number;
+	deaths: number;
+}
+
+export interface NytState {
+	date: string;
+	state: string;
+	fips: number;
+	cases: number;
+	deaths: number;
 }
 
 export interface All {
@@ -300,8 +385,8 @@ export interface HistoricalCountry {
 export interface Jhucsse {
 	country: string;
 	province: Array<string> | string | null;
-	updatedAt: Date;
-	stats: Stats<number>;
+	updatedAt: string;
+	stats: JhucsseStats<number>;
 	coordinates: {
 		latitude: string;
 		longitude: string;
@@ -311,9 +396,9 @@ export interface Jhucsse {
 export interface JhucsseCounties {
 	country: string;
 	province: string | null;
-	updatedAt: Date;
+	updatedAt: string;
 	county: string;
-	stats: Stats<number>;
+	stats: JhucsseStats<number>;
 	coordinates: {
 		latitude: string;
 		longitude: string;
@@ -338,7 +423,22 @@ export interface ContinentE extends Continent {
 
 export interface HistoricalAll extends Stats<object> {}
 
-export interface Stats<T> {
+export interface HistoricalUSA {
+	province: string;
+	country: null;
+	timeline: Stat<object>;
+}
+
+export interface Stat<T> {
+	cases: T;
+	deaths: T;
+}
+
+export interface Stats<T> extends Stat<T> {
+	recovered: T;
+}
+
+export interface JhucsseStats<T> {
 	confirmed: T;
 	deaths: T;
 	recovered: T;
