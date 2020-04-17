@@ -33,19 +33,19 @@ export class NovelCovid {
 
 		if (country) {
 
-			return fetch(`${this.baseURL}/v2/countries/${country}?yesterday=true`).then(json);
+			return fetch(`${this.baseURL}/v2/yesterday/${country}`).then(json);
 
 		} else if (!country && sort) {
 
-			return fetch(`${this.baseURL}/v2/countries?yesterday=true&sort=${sort}`).then(json);
+			return fetch(`${this.baseURL}/v2/yesterday?sort=${sort}`).then(json);
 
 		}
 
-		return fetch(`${this.baseURL}/v2/countries?yesterday=true`).then(json);
+		return fetch(`${this.baseURL}/v2/yesterday`).then(json);
 	}
 
 	/**
-	 * @description Gets all the affected country names.
+	 * @description Gets all the effected country names.
 	 * @returns {Promise<Array<String>>}
 	 */
 	async countryNames(): Promise<Array<string>> {
