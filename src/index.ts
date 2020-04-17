@@ -18,7 +18,7 @@ export class NovelCovid {
 	 */
 	async all(): Promise<All> {
 
-		return fetch(`${this.baseURL}/all`).then(json);
+		return fetch(`${this.baseURL}/v2/all`).then(json);
 	}
 
 	/**
@@ -33,15 +33,15 @@ export class NovelCovid {
 
 		if (country) {
 
-			return fetch(`${this.baseURL}/yesterday/${country}`).then(json);
+			return fetch(`${this.baseURL}/v2/yesterday/${country}`).then(json);
 
 		} else if (!country && sort) {
 
-			return fetch(`${this.baseURL}/yesterday?sort=${sort}`).then(json);
+			return fetch(`${this.baseURL}/v2/yesterday?sort=${sort}`).then(json);
 
 		}
 
-		return fetch(`${this.baseURL}/yesterday`).then(json);
+		return fetch(`${this.baseURL}/v2/yesterday`).then(json);
 	}
 
 	/**
@@ -67,15 +67,15 @@ export class NovelCovid {
 
 		if (country) {
 
-			return fetch(`${this.baseURL}/countries/${country}`).then(json);
+			return fetch(`${this.baseURL}/v2/countries/${country}`).then(json);
 
 		} else if (!country && sort) {
 
-			return fetch(`${this.baseURL}/countries?sort=${sort}`).then(json);
+			return fetch(`${this.baseURL}/v2/countries?sort=${sort}`).then(json);
 
 		}
 
-		return fetch(`${this.baseURL}/countries`).then(json);
+		return fetch(`${this.baseURL}/v2/countries`).then(json);
 
 	}
 
@@ -85,7 +85,7 @@ export class NovelCovid {
 	 */
 	async states(): Promise<Array<State>> {
 
-		return fetch(`${this.baseURL}/states`).then(json);
+		return fetch(`${this.baseURL}/v2/states`).then(json);
 
 	}
 
