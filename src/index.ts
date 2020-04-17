@@ -92,9 +92,11 @@ export class NovelCovid {
 
 	/**
 	 * @description Fetches data of corona virus in United States.
+	 * @param {?string|null} state - For a state in US.
+	 * @param {?StateOptions} options - options for State.
 	 * @returns {Promise<Array<State>>}
 	 */
-	async states(state: string, options?: StateOptions): Promise<Array<State> | State>;
+	async states(state?: string, options?: StateOptions): Promise<Array<State> | State>;
 	async states(state?: string | null, options?: StateOptions): Promise<Array<State> | State> {
 
 		if (state && !options) {
