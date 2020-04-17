@@ -2,46 +2,32 @@ import fetch, { Response } from 'node-fetch';
 
 const json = (res: Response) => res.json();
 
-
 export class NovelCovid {
 
 	public baseURL: string;
 
 	public constructor() {
 
-		this.baseURL = 'https://corona.lmao.ninja';
+		this.baseURL = 'https://corona.lmao.ninja/v2';
 	}
 
 	/**
 	 * @description Gets all the information from the api.
+	 * @param {?yesterdayOptions} options - Options for All.
 	 * @returns {Promise<All>}
 	 */
-	async all(): Promise<All> {
+	async all(options?: AllOptions): Promise<All> {
 
-		return fetch(`${this.baseURL}/v2/all`).then(json);
-	}
+		if (options) {
 
-	/**
-	 * @description Gets yesterday's information from the api.
- 	 * @param {?string} [country=null] - Country details you want to fetch.
-	 * @param {?string} sort - Sort by active, deaths , etc.
-	 * @returns {Promise<Array<Country>| Country |null>}
-	 */
-	async yesterday(country?: string | null | number): Promise<Country | Array<Country> | null>;
-	async yesterday(country: null, sort?: keyof CountrySort): Promise<Array<Country>>;
-	async yesterday(country?: string | null | number, sort?: keyof Country): Promise<Array<Country> | Country | null> {
+			if (options.yesterday) {
 
-		if (country) {
+				return fetch(`${this.baseURL}/all?yesterday=${options.yesterday}`).then(json);
 
-			return fetch(`${this.baseURL}/v2/yesterday/${country}`).then(json);
-
-		} else if (!country && sort) {
-
-			return fetch(`${this.baseURL}/v2/yesterday?sort=${sort}`).then(json);
-
+			}
 		}
 
-		return fetch(`${this.baseURL}/v2/yesterday`).then(json);
+		return fetch(`${this.baseURL}/all`).then(json);
 	}
 
 	/**
@@ -50,9 +36,8 @@ export class NovelCovid {
 	 */
 	async countryNames(): Promise<Array<string>> {
 
-		const countries = await this.countries() as Country[] | null;
+		return (await (this.countries() as Promise<Country[]>)).map(x => x.country);
 
-		return countries!.map(x => x.country);
 	}
 
 	/**
@@ -61,21 +46,47 @@ export class NovelCovid {
 	 * @param {?string} sort - Sort by active, deaths , etc.
 	 * @returns {Promise<Array<Country>| Country |null>}
 	 */
-	async countries(country?: string | null | number): Promise<Country | Array<Country> | null>;
-	async countries(country: null, sort?: keyof CountrySort): Promise<Array<Country>>;
-	async countries(country?: string | null | number, sort?: keyof Country): Promise<Array<Country> | Country | null> {
+	async countries(country?: string | number, options?: CountryOptions): Promise<Array<Country> | Country>;
+	async countries(country: null, options?: CountryOptions): Promise<Array<Country>>;
+	async countries(country?: string | null | number, options?: CountryOptions): Promise<Array<Country> | Country> {
 
-		if (country) {
+		if (country && !options) {
 
-			return fetch(`${this.baseURL}/v2/countries/${country}`).then(json);
+			return fetch(`${this.baseURL}/countries/${country}`).then(json);
 
-		} else if (!country && sort) {
+		} else if (!country && options) {
 
-			return fetch(`${this.baseURL}/v2/countries?sort=${sort}`).then(json);
+			if (options.sort && !options.yesterday && !options.strict) {
 
+				return fetch(`${this.baseURL}/countries?sort=${options.sort}`).then(json);
+
+			} else if (options.sort && options.yesterday && !options.strict) {
+
+				return fetch(`${this.baseURL}/countries?yesterday=${options.yesterday}&sort=${options.sort}`).then(json);
+
+			} else if (!options.sort && options.yesterday && !options.strict) {
+
+				return fetch(`${this.baseURL}/countries?yesterday=${options.yesterday}`).then(json);
+			}
+
+		} else if (country && options) {
+
+			if (!options.sort && options.yesterday && !options.strict) {
+
+				return fetch(`${this.baseURL}/countries/${country}?yesterday=${options.yesterday}`).then(json);
+
+			} else if (!options.sort && options.yesterday && options.strict) {
+
+				return fetch(`${this.baseURL}/countries/${country}?yesterday=${options.yesterday}&strict=${options.strict}`).then(json);
+
+			} else if (!options.sort && !options.yesterday && options.strict) {
+
+				return fetch(`${this.baseURL}.countries/${country}?strict=${options.strict}`).then(json);
+
+			}
 		}
 
-		return fetch(`${this.baseURL}/v2/countries`).then(json);
+		return fetch(`${this.baseURL}/countries`).then(json);
 
 	}
 
@@ -83,9 +94,38 @@ export class NovelCovid {
 	 * @description Fetches data of corona virus in United States.
 	 * @returns {Promise<Array<State>>}
 	 */
-	async states(): Promise<Array<State>> {
+	async states(state: string, options?: StateOptions): Promise<Array<State> | State>;
+	async states(state?: string | null, options?: StateOptions): Promise<Array<State> | State> {
 
-		return fetch(`${this.baseURL}/v2/states`).then(json);
+		if (state && !options) {
+
+			return fetch(`${this.baseURL}/states/${state}`).then(json);
+
+		} else if (!state && options) {
+
+			if (options.sort && !options.yesterday) {
+
+				return fetch(`${this.baseURL}/states?sort=${options.sort}`).then(json);
+
+			} else if (!options.sort && options.yesterday) {
+
+				return fetch(`${this.baseURL}/states?yesterday=${options.yesterday}`).then(json);
+
+			}
+
+			return fetch(`${this.baseURL}/states?sort=${options.sort}&yesterday=${options.yesterday}`).then(json);
+
+		} else if (state && options) {
+
+			if (options.yesterday && !options.sort) {
+
+				return fetch(`${this.baseURL}/states/${state}?yesterday=${options.yesterday}`).then(json);
+
+			}
+
+		}
+
+		return fetch(`${this.baseURL}/states`).then(json);
 
 	}
 
@@ -131,45 +171,47 @@ export class NovelCovid {
 
 		if (counties && !countyname) {
 
-			return fetch(`${this.baseURL}/v2/jhucsse/counties`).then(json);
+			return fetch(`${this.baseURL}/jhucsse/counties`).then(json);
 
 		} else if (counties && countyname) {
 
-			return fetch(`${this.baseURL}/v2/jhucsse/counties/${countyname}`).then(json);
+			return fetch(`${this.baseURL}/jhucsse/counties/${countyname}`).then(json);
 
 		}
 
-		return fetch(`${this.baseURL}/v2/jhucsse`).then(json);
+		return fetch(`${this.baseURL}/jhucsse`).then(json);
 
 	}
 
 }
 
 export interface All {
-	cases: number;
-	deaths: number;
-	recovered: number;
 	updated: number;
-	active: number;
+	cases: number;
 	todayCases: number;
+	deaths: number;
 	todayDeaths: number;
+	recovered: number;
+	active: number;
 	critical: number;
 	casesPerOneMillion: number;
 	deathsPerOneMillion: number;
 	tests: number;
 	testsPerOneMillion: number;
+	continent: string;
 	affectedCountries: number;
 }
 
 export interface Country {
+	updated: number;
 	country: string;
 	countryInfo: {
 		_id: number;
-		latitude: number;
-		longitue: number;
-		flag: string;
 		iso3: string;
 		iso2: string;
+		lat: number;
+		long: number;
+		flag: string;
 	};
 	cases: number;
 	todayCases: number;
@@ -180,9 +222,9 @@ export interface Country {
 	critical: number;
 	casesPerOneMillion: number;
 	deathsPerOneMillion: number;
-	updated: number;
 	tests: number;
 	testsPerOneMillion: number;
+	continent: string;
 }
 
 export interface State {
@@ -231,17 +273,6 @@ export interface JhucsseCounties {
 	};
 }
 
-export interface CountrySort {
-	cases: number;
-	todayCases: number;
-	deaths: number;
-	recovered: number;
-	active: number;
-	critical: number;
-	casesPerOneMillion: number;
-	deathsPerOneMillion: number;
-}
-
 export interface HistoricalAll extends Stats<object> {}
 
 export interface Stats<T> {
@@ -249,3 +280,25 @@ export interface Stats<T> {
 	deaths: T;
 	recovered: T;
 }
+
+export interface AllOptions {
+	yesterday?: yesterday;
+}
+
+export interface CountryOptions extends AllOptions {
+	sort?: CountrySort;
+	strict?: boolean;
+}
+
+export interface StateOptions extends AllOptions {
+	sort?: Sort;
+}
+
+export type Sort = 'cases' | 'todayCases' | 'deaths' | 'todayDeaths' | 'active';
+
+export type CountrySort = Sort | 'recovered' | 'critical' | 'casesPerOneMillion' | 'deathsPerOneMillion';
+
+export type yesterday = boolean | 1 | 0;
+
+export default NovelCovid;
+

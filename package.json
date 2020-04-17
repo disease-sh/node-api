@@ -7,7 +7,8 @@
     "prepublishOnly": "yarn build",
     "build": "tsc -p .",
     "lint": "eslint --ext ts src --fix",
-    "test": "eslint --ext ts src"
+    "test": "eslint --ext ts src",
+    "dev": "yarn build && node test"
   },
   "version": "1.2.4",
   "description": "An Api wrapper to get information about the Novel CoronaVirus.",
