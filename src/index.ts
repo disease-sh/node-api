@@ -31,7 +31,7 @@ export class NovelCovid {
 	}
 
 	/**
-	 * @description Gets all the effected country names.
+	 * @description Gets all the affected country names.
 	 * @returns {Promise<Array<String>>}
 	 */
 	async countryNames(): Promise<Array<string>> {
@@ -43,7 +43,7 @@ export class NovelCovid {
 	/**
 	 * @description Fetches data of corona virus by country.
 	 * @param {?string} [country=null] - Country details you want to fetch.
-	 * @param {?string} sort - Sort by active, deaths , etc.
+	 * @param {CountryOptions} options - options for country.
 	 * @returns {Promise<Array<Country>| Country |null>}
 	 */
 	async countries(country?: string | number, options?: CountryOptions): Promise<Array<Country> | Country>;
