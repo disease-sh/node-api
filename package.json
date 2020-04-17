@@ -1,7 +1,7 @@
 {
   "name": "novelcovid",
   "dependencies": {
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.7.0"
   },
   "scripts": {
     "prepublishOnly": "yarn build",
