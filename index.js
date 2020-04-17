@@ -9,12 +9,10 @@ module.exports = {
       path += `/${Array.isArray(opts.country) ? (opts.country.join('|')) : opts.country}`
     if(opts.sort || typeof(opts.strict) === 'boolean') {
       path += '?'
-      if(opts.sort) {
+      if(opts.sort) 
         path += `sort=${opts.sort}`
-      }
-      if(typeof(opts.strict) === 'boolean') {
+      if(typeof(opts.strict) === 'boolean') 
         path += (opts.sort?'&':'')+'strict='+opts.strict
-      }
     }
     return fetchJson(path)
   },
@@ -24,12 +22,10 @@ module.exports = {
       path += `/${opts.continent}`
     if(opts.sort || typeof(opts.strict) === 'boolean') {
       path += '?'
-      if(opts.sort) {
+      if(opts.sort) 
         path += `sort=${opts.sort}`
-      }
-      if(typeof(opts.strict) === 'boolean') {
+      if(typeof(opts.strict) === 'boolean') 
         path += (opts.sort?'&':'')+'strict='+opts.strict
-      }
     }
     return fetchJson(path)
   },
@@ -39,12 +35,10 @@ module.exports = {
       path += `/${Array.isArray(opts.state) ? (opts.state.join('|')) : opts.state}`
     if(opts.sort || typeof(opts.strict) === 'boolean') {
       path += '?'
-      if(opts.sort) {
+      if(opts.sort) 
         path += `sort=${opts.sort}`
-      }
-      if(typeof(opts.strict) === 'boolean') {
+      if(typeof(opts.strict) === 'boolean') 
         path += (opts.sort?'&':'')+'strict='+opts.strict
-      }
     }
     return fetchJson(path)
   },
@@ -56,12 +50,10 @@ module.exports = {
         path += `/${Array.isArray(opts.country) ? (opts.country.join('|')) : opts.country}`
       if(opts.sort || typeof(opts.strict) === 'boolean') {
         path += '?yesterday=true&'
-        if(opts.sort) {
+        if(opts.sort) 
           path += `sort=${opts.sort}`
-        }
-        if(typeof(opts.strict) === 'boolean') {
+        if(typeof(opts.strict) === 'boolean') 
           path += (opts.sort?'&':'')+'strict='+opts.strict
-        }
       }
       return fetchJson(path)
     },
@@ -86,12 +78,10 @@ module.exports = {
       path += `/${Array.isArray(opts.state) ? (opts.state.join('|')) : opts.state}`
     if(opts.sort || typeof(opts.strict) === 'boolean') {
       path += '?yesterday=true&'
-      if(opts.sort) {
+      if(opts.sort)
         path += `sort=${opts.sort}`
-      }
-      if(typeof(opts.strict) === 'boolean') {
+      if(typeof(opts.strict) === 'boolean')
         path += (opts.sort?'&':'')+'strict='+opts.strict
-      }
     }
     return fetchJson(path)
     }
@@ -111,13 +101,26 @@ module.exports = {
       let path = 'v2/historical'
       if(opts.country) {
         path += `/${Array.isArray(opts.country) ? (opts.country.join('|')) : opts.country}`
-        if(opts.province) {
+        if(opts.province) 
           path += `/${Array.isArray(opts.province) ? (opts.province.join('|')) : opts.province}`
-        }
-        if(opts.days) {
+        if(opts.days) 
           path += `?lastdays=${opts.days}`
-        }
       }
+      return fetchJson(path)
+    }
+  },
+  nyt: {
+    usa: () => fetchJson('v2/nyt/usa'),
+    states: (opts = {}) => {
+      let path = 'v2/nyt/states'
+      if(opts.state) 
+        path += `/${opts.state}`
+      return fetchJson(path)
+    },
+    counties: (opts = {}) => {
+      let path = 'v2/nyt/counties'
+      if(opts.county) 
+        path += `/${opts.county}`
       return fetchJson(path)
     }
   }

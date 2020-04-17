@@ -174,8 +174,21 @@ api.historical.countries({country:'china', province:'hubei'}).then(console.log)
 api.historical.countries({country:'china', province:['hubei','anhui']}).then(console.log)
 ```
 
+### New York Times Data (USA)
 
+```js
+// this prints a timeline of data from the US
+api.nyt.usa().then(console.log)
 
+// this prints an array of timelines all infected US states
+api.nyt.states().then(console.log)
 
+// this prints a timeline of a specified US state
+api.nyt.states({state:'illinois'}).then(console.log)
 
+// this prints an array of timelines all infected US counties
+api.nyt.counties().then(console.log)
 
+// this prints an array of timelines of states of a specified US county
+api.nyt.counties({county:'cook'}).then(console.log)
+```

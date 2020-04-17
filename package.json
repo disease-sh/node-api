@@ -1,6 +1,6 @@
 {
   "name": "covidapi",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "nodejs api wrapper for https://github.com/novelcovid/api",
   "main": "index.js",
   "dependencies": {
@@ -11,7 +11,7 @@
     "mocha": "7.1.1"
   },
   "scripts": {
-    "test": "mocha ./index.spec.js --exit"
+    "test": "mocha ./index.spec.js --exit --t 30000"
   },
   "repository": {
     "type": "git",
