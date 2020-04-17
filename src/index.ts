@@ -130,6 +130,53 @@ export class NovelCovid {
 	}
 
 	/**
+	 * @description Shows information as per continent.
+	 * @param {?string} continent - For a continent.
+	 * @param {?ContinentOptions} options - Options for continent.
+	 */
+	async continents(continent?: string | null): Promise<ContinentE>;
+	async continents(continent?: string | null, options?: ContinentOptions): Promise<Array<Continent> | Continent>;
+	async continents(continent?: string | null, options?: ContinentOptions): Promise<Array<Continent> | Continent | ContinentE> {
+
+		if (continent && !options) {
+
+			return fetch(`${this.baseURL}/continents/${continent}`).then(json);
+
+		} else if (!continent && options) {
+
+			if (options.sort && !options.yesterday && !options.strict) {
+
+				return fetch(`${this.baseURL}/continents?sort=${options.sort}`).then(json);
+
+			} else if (!options.sort && options.yesterday && !options.strict) {
+
+				return fetch(`${this.baseURL}/continents?yesterday=${options.yesterday}`).then(json);
+			}
+
+			return fetch(`${this.baseURL}/continents?sort=${options.sort}&yesterday=${options.yesterday}`).then(json);
+
+		} else if (continent && options) {
+
+			if (!options.sort && options.yesterday && !options.strict) {
+
+				return fetch(`${this.baseURL}/continents/${continent}?yesterday=${options.yesterday}`).then(json);
+
+			} else if (!options.sort && options.yesterday && options.strict) {
+
+				return fetch(`${this.baseURL}/continents/${continent}?yesterday=${options.yesterday}&strict=${options.strict}`).then(json);
+
+			} else if (!options.sort && !options.yesterday && options.strict) {
+
+				return fetch(`${this.baseURL}/continents/${continent}?strict=${options.strict}`).then(json);
+			}
+
+		}
+
+		return fetch(`${this.baseURL}/continents`).then(json);
+
+	}
+
+	/**
 	 * @description Get historical data from the start of 2020. (JHU CSSE GISand Data).
 	 * @param {?boolean} [all=null] - Returns  all the cases and deaths.
 	 * @param {?string} [country=null] -  Returns data of a specific country.
@@ -273,6 +320,22 @@ export interface JhucsseCounties {
 	};
 }
 
+export interface Continent {
+	updated: number;
+	cases: number;
+	todayCases: number;
+	deaths: number;
+	todayDeaths: number;
+	recovered: number;
+	active: number;
+	critical: number;
+	continent: string;
+}
+
+export interface ContinentE extends Continent {
+	countries: Array<string>;
+}
+
 export interface HistoricalAll extends Stats<object> {}
 
 export interface Stats<T> {
@@ -292,6 +355,11 @@ export interface CountryOptions extends AllOptions {
 
 export interface StateOptions extends AllOptions {
 	sort?: Sort;
+}
+
+export interface ContinentOptions extends AllOptions {
+	sort?: CountrySort;
+	strict?: boolean;
 }
 
 export type Sort = 'cases' | 'todayCases' | 'deaths' | 'todayDeaths' | 'active';

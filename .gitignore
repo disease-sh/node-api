@@ -66,3 +66,5 @@ dist/
 #lockfiles
 yarn.lock
 package-lock.json
+
+test.ts
