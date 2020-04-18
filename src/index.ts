@@ -46,8 +46,9 @@ export class NovelCovid {
 	 * @param {CountryOptions} options - options for country.
 	 * @returns {Promise<Array<Country>| Country>}
 	 */
-	async countries(country?: string | number, options?: CountryOptions): Promise<Array<Country> | Country>;
-	async countries(country: null, options?: CountryOptions): Promise<Array<Country>>;
+	async countries(): Promise<Array<Country>>;
+	async countries(country?: string | number): Promise<Array<Country> | Country>;
+	async countries(country?: string | null, options?: CountryOptions): Promise<Array<Country>| Country>;
 	async countries(country?: string | null | number, options?: CountryOptions): Promise<Array<Country> | Country> {
 
 		if (country && !options) {
@@ -95,6 +96,7 @@ export class NovelCovid {
 	 * @param {?StateOptions} options - options for State.
 	 * @returns {Promise<Array<State>>}
 	 */
+	async states(): Promise<Array<State>>;
 	async states(state?: string | null, options?: StateOptions): Promise<Array<State> | State>;
 	async states(state?: string | null, options?: StateOptions): Promise<Array<State> | State> {
 
@@ -135,7 +137,8 @@ export class NovelCovid {
 	 * @param {?ContinentOptions} options - Options for continent.
 	 * @returns {Promise<Array<Continent> | Continent | ContinentE>}
 	 */
-	async continents(continent?: string | null): Promise<ContinentE>;
+	async continents(): Promise<Array<Continent>>;
+	async continents(continent: string | null): Promise<ContinentE>;
 	async continents(continent?: string | null, options?: ContinentOptions): Promise<Array<Continent> | Continent>;
 	async continents(continent?: string | null, options?: ContinentOptions): Promise<Array<Continent> | Continent | ContinentE> {
 
@@ -253,6 +256,7 @@ export class NovelCovid {
 	 * @param {?string} state - Specfic State.
 	 * @returns {Promise<Array<NytState>>}
 	 */
+	async nytState(state?: string): Promise<Array<NytState>>
 	async nytState(state?: string): Promise<Array<NytState>> {
 
 		if (state) {
@@ -270,6 +274,7 @@ export class NovelCovid {
 	 * @param {?string} county - Specfic county.
 	 * @returns {Promise<Array<NytCounties>>}
 	 */
+	async nytCounties(county?: string): Promise<Array<NytCounties>>;
 	async nytCounties(county?: string): Promise<Array<NytCounties>> {
 
 		if (county) {
