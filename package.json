@@ -10,7 +10,7 @@
     "test": "eslint --ext ts src",
     "dev": "yarn build && node dist/test"
   },
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "An Api wrapper to get information about the Novel CoronaVirus.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
