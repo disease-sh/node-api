@@ -48,12 +48,12 @@ module.exports = {
       let path = 'v2/countries'
       if(opts.country) 
         path += `/${Array.isArray(opts.country) ? (opts.country.join('|')) : opts.country}`
+      path += '?yesterday=true'
       if(opts.sort || typeof(opts.strict) === 'boolean') {
-        path += '?yesterday=true&'
         if(opts.sort) 
-          path += `sort=${opts.sort}`
+          path += `&sort=${opts.sort}`
         if(typeof(opts.strict) === 'boolean') 
-          path += (opts.sort?'&':'')+'strict='+opts.strict
+          path += '&strict='+opts.strict
       }
       return fetchJson(path)
     },
@@ -61,13 +61,13 @@ module.exports = {
       let path = 'v2/continents'
       if(opts.continent) 
         path += `/${opts.continent}`
+      path += '?yesterday=true'
       if(opts.sort || typeof(opts.strict) === 'boolean') {
-        path += '?yesterday=true&'
         if(opts.sort) {
-          path += `sort=${opts.sort}`
+          path += `&sort=${opts.sort}`
         }
         if(typeof(opts.strict) === 'boolean') {
-          path += (opts.sort?'&':'')+'strict='+opts.strict
+          path += '&strict='+opts.strict
         }
       }
       return fetchJson(path)
