@@ -34,7 +34,12 @@ Since 0.1.0, only /v2 endpoints are supported. Keep that in mind.
 
 ```js
 const api = require('covidapi');
-```
+
+// you can choose which URL to use, this will not change the behaviour of the API
+api.settings({
+    baseUrl: 'https://disease.sh' | 'https://api.caw.sh' | 'https://corona.lmao.ninja'
+})
+``` 
 
 ### Summary
 
