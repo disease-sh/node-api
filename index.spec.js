@@ -1,6 +1,8 @@
 const api = require('./')
 require('chai').should()
 
+api.settings({baseUrl: 'https://corona.lmao.ninja'})
+
 describe('DEFAULT', function () {
   it('/all', async function () {
     const data = await api.all()

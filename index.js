@@ -1,7 +1,13 @@
 const fetch = require('node-fetch'),
-      fetchJson = (path) => fetch(`${baseUrl}/${path}`).then(r => r.json()),
-      baseUrl = 'https://corona.lmao.ninja'
+      settings = { 
+        baseUrl: 'https://disease.sh',
+      },
+      fetchJson = (path) => fetch(`${settings.baseUrl}/${path}`).then(r => r.json())
 module.exports = {
+  settings : (opts) => {
+    if (['https://disease.sh', 'https://api.caw.sh', 'https://corona.lmao.ninja'].includes(opts.baseUrl))
+      settings.baseUrl = opts.baseUrl
+  },
   all : () => fetchJson('v2/all'),
   countries : (opts = {}) => {
     let path = 'v2/countries'
