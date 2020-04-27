@@ -24,6 +24,12 @@ Using NPM:
 npm i -s covidapi
 ```
 
+## Remarks
+
+This wrapper uses the '@aero/centra' package to send requests.
+It is way faster than any other request package other than 'http.request' package.
+Other wrappers use node-fetch, which is way slower.
+
 ## Usage
 
 All shown examples use Promises but can also await/async to fetch data using covidapi.
@@ -39,7 +45,7 @@ const api = require('covidapi');
 api.settings({
     baseUrl: 'https://disease.sh' | 'https://api.caw.sh' | 'https://corona.lmao.ninja'
 })
-``` 
+```
 
 ### Summary
 

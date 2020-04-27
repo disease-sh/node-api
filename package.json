@@ -1,10 +1,10 @@
 {
   "name": "covidapi",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "nodejs api wrapper for https://github.com/novelcovid/api",
   "main": "index.js",
   "dependencies": {
-    "node-fetch": "2.6.0"
+    "@aero/centra": "1.0.3"
   },
   "devDependencies": {
     "chai": "4.2.0",

@@ -1,8 +1,8 @@
-const fetch = require('node-fetch'),
+const fetch = require('@aero/centra'),
       settings = { 
         baseUrl: 'https://disease.sh',
       },
-      fetchJson = (path) => fetch(`${settings.baseUrl}/${path}`).then(r => r.json())
+      fetchJson = (path) => fetch(`${settings.baseUrl}/${path}`).json()
 module.exports = {
   settings : (opts) => {
     if (['https://disease.sh', 'https://api.caw.sh', 'https://corona.lmao.ninja'].includes(opts.baseUrl))
