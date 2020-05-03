@@ -203,3 +203,19 @@ api.nyt.counties().then(console.log)
 // this prints an array of timelines of states of a specified US county
 api.nyt.counties({county:'cook'}).then(console.log)
 ```
+
+### Mobility Data (Apple)
+
+```js
+// this prints a list of available country names
+api.apple.countries().then(console.log)
+
+// this prints a list of available subregions for a specified country
+api.apple.subregions('austria').then(console.log)
+
+// this prints mobility data for a specified subregion of a country, all is used to query total data
+api.apple.mobilityData({country:'austria', subregion:'all'}).then(console.log)
+
+// this prints mobility data for multiple specified subregions of a country
+api.apple.mobilityData({country:'austria', subregion:['vienna', 'salzburg']}).then(console.log)
+```

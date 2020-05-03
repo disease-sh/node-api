@@ -1,7 +1,7 @@
 const api = require('./')
 require('chai').should()
 
-api.settings({baseUrl: 'https://corona.lmao.ninja'})
+api.settings({baseUrl: 'https://api.caw.sh'})
 
 describe('DEFAULT', function () {
   it('/all', async function () {
@@ -688,7 +688,7 @@ describe('HISTORICAL', function () {
   })
 })
 
-describe('NYTimes', function() {
+describe('NY TIMES', function() {
   it('/v2/nyt/states', async function () {
     const data = await api.nyt.states()
     data.should.be.a('array')
@@ -746,6 +746,59 @@ describe('NYTimes', function() {
       row.should.have.property('date')
       row.should.have.property('cases')
       row.should.have.property('deaths')
+    }
+  })
+})
+
+describe('APPLE MOBILITY', function() {
+  it('/v2/apple/countries', async function () {
+    const data = await api.apple.countries()
+    data.should.be.a('array').of.length(63)
+    for(let row of data) row.should.be.a('string')
+  })
+
+  it('/v2/apple/countries/austria', async function () {
+    const data = await api.apple.subregions('austria')
+    data.should.be.a('object')
+    data.should.have.property('country', 'Austria')
+    data.should.have.property('subregions')
+    data.subregions.should.be.a('array').of.length(10)
+    for(let row of data.subregions) row.should.be.a('string')
+  })
+
+  it('/v2/apple/countries/austria/vienna', async function () {
+    const data = await api.apple.mobilityData({country:'austria', subregion: 'vienna'})
+    data.should.be.a('object')
+    //data.should.have.property('country')
+    data.should.have.property('subregion', 'vienna')
+    data.should.have.property('data')
+    data.data.should.be.a('array')
+    for(let row of data.data){
+      row.should.have.property('subregion_and_city')
+      row.should.have.property('geo_type')
+      row.should.have.property('date')
+      row.should.have.property('driving')
+      row.should.have.property('transit')
+      row.should.have.property('walking')
+    }
+  })
+
+  it('/v2/apple/countries/austria/vienna|salzburg', async function () {
+    const data = await api.apple.mobilityData({country:'austria', subregion: ['vienna', 'salzburg']})
+    data.should.be.a('array')
+    for(let entry of data) {
+      //data.should.have.property('country')
+      entry.should.have.property('subregion')
+      entry.should.have.property('data')
+      entry.data.should.be.a('array')
+      for(let row of entry.data){
+        row.should.have.property('subregion_and_city')
+        row.should.have.property('geo_type')
+        row.should.have.property('date')
+        row.should.have.property('driving')
+        row.should.have.property('transit')
+        row.should.have.property('walking')
+      }
     }
   })
 })

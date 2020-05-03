@@ -1,13 +1,8 @@
 const fetch = require('@aero/centra'),
-      settings = { 
-        baseUrl: 'https://disease.sh',
-      },
+      settings = { baseUrl: 'https://disease.sh' },
       fetchJson = (path) => fetch(`${settings.baseUrl}/${path}`).json()
 module.exports = {
-  settings : (opts) => {
-    if (['https://disease.sh', 'https://api.caw.sh', 'https://corona.lmao.ninja'].includes(opts.baseUrl))
-      settings.baseUrl = opts.baseUrl
-  },
+  settings : (opts) => ['https://disease.sh', 'https://api.caw.sh', 'https://corona.lmao.ninja'].includes(opts.baseUrl) && (settings.baseUrl = opts.baseUrl),
   all : () => fetchJson('v2/all'),
   countries : (opts = {}) => {
     let path = 'v2/countries'
@@ -127,6 +122,19 @@ module.exports = {
       let path = 'v2/nyt/counties'
       if(opts.county) 
         path += `/${opts.county}`
+      return fetchJson(path)
+    }
+  },
+  apple: {
+    countries: () => fetchJson('v2/apple/countries'),
+    subregions: (country) => fetchJson(`v2/apple/countries/${country}`),
+    mobilityData: (opts = {}) => {
+      let path = 'v2/apple/countries'
+      if(opts.country) {
+        path += `/${opts.country}`
+        if(opts.subregion) 
+          path += `/${Array.isArray(opts.subregion) ? (opts.subregion.join('|')) : opts.subregion}`
+      }
       return fetchJson(path)
     }
   }
