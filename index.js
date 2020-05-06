@@ -1,8 +1,8 @@
 const fetch = require('@aero/centra'),
-      settings = { baseUrl: 'https://covidapi.xyz' },
+      settings = { baseUrl: 'https://disease.sh' },
       fetchJson = (path) => fetch(`${settings.baseUrl}/${path}`).json()
 module.exports = {
-  settings : (opts) => ['https://disease.sh', 'https://api.caw.sh', 'https://corona.lmao.ninja', 'https://covidapi.xyz'].includes(opts.baseUrl) && (settings.baseUrl = opts.baseUrl),
+  settings : (opts) => ['https://disease.sh', 'https://api.caw.sh', 'https://corona.lmao.ninja'].includes(opts.baseUrl) && (settings.baseUrl = opts.baseUrl),
   all : () => fetchJson('v2/all'),
   countries : (opts = {}) => {
     let path = 'v2/countries'
