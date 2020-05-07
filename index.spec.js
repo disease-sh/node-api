@@ -619,6 +619,20 @@ describe('HISTORICAL', function () {
     data.recovered.should.be.a('object')
   })
 
+  it('/v2/historical/all?lastdays=10', async function () {
+    const data = await api.historical.all({days:10})
+    data.should.be.a('object')
+    data.should.have.property('cases')
+    data.cases.should.be.a('object')
+    Object.keys(data.cases).length.should.be.equal(10);
+    data.should.have.property('deaths')
+    data.deaths.should.be.a('object')
+    Object.keys(data.deaths).length.should.be.equal(10);
+    data.should.have.property('recovered')
+    data.recovered.should.be.a('object')
+    Object.keys(data.recovered).length.should.be.equal(10);
+  })
+
   it('/v2/historical/china', async function () {
     const data = await api.historical.countries({country:'china'})
     data.should.be.a('object')

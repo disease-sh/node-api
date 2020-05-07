@@ -97,7 +97,7 @@ module.exports = {
     }
   },
   historical: {
-    all: () => fetchJson('v2/historical/all'),
+    all: (opts = {}) => fetchJson(`v2/historical/all${opts.days ? `?lastdays=${opts.days}`:''}`),
     countries: (opts = {}) => {
       let path = 'v2/historical'
       if(opts.country) {

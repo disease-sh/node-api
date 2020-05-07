@@ -169,13 +169,16 @@ api.jhucsse.counties({county:['abbeville','acadia']}).then(console.log)
 // this prints the global timeline
 api.historical.all().then(console.log)
 
+// this prints the global timeline for the last 10 days (use -1 to get all data)
+api.historical.all().then(console.log)
+
 // this prints an array of infected countries and their timeline
 api.historical.countries().then(console.log)
 
 // this prints a specified country and its timeline
 api.historical.countries({country:'china'}).then(console.log)
 
-// this prints a specified country and its timeline for the last 10 days
+// this prints a specified country and its timeline for the last 10 days (use -1 to get all data)
 api.historical.countries({country:'china', days:10}).then(console.log)
 
 // this prints a specified province of a specified country and its timeline
