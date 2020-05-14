@@ -1,19 +1,24 @@
 <div align="center">
-	<h1> NovelCovid </h1>
+	<h1>NovelCovid</h1>
 	<h6>(aka covidapi)</h6>
 	<strong> <i>A NodeJs Wrapper for the <a href="https://disease.sh">novelCOVID API</a></i></strong><br><br>
 
-	![GitHub top language](https://img.shields.io/github/languages/top/novelcovid/node-api)
-	![Snyk Vulnerabilities for npm scoped package](https://img.shields.io/snyk/vulnerabilities/npm/novelcovid)
-	![GitHub package.json version](https://img.shields.io/github/package-json/v/novelcovid/node-api)
-	![GitHub last commit](https://img.shields.io/github/last-commit/novelcovid/node-api)<br>
-	![npm bundle size](https://img.shields.io/bundlephobia/minzip/novelcovid)
-	![npm](https://img.shields.io/npm/dw/novelcovid)<br>
-	![GitHub issues](https://img.shields.io/github/issues-raw/novelcovid/node-api)
-	![GitHub](https://img.shields.io/github/license/novelcovid/node-api)
+![GitHub top language](https://img.shields.io/github/languages/top/novelcovid/node-api)
+![Snyk Vulnerabilities for npm scoped package](https://img.shields.io/snyk/vulnerabilities/npm/novelcovid)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/novelcovid/node-api)
+![GitHub last commit](https://img.shields.io/github/last-commit/novelcovid/node-api)<br>
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/novelcovid)
+![npm](https://img.shields.io/npm/dw/novelcovid)<br>
+![GitHub issues](https://img.shields.io/github/issues-raw/novelcovid/node-api)
+![GitHub](https://img.shields.io/github/license/novelcovid/node-api)
 
 </div>
 <br>
+
+## Disclaimer
+
+The old NovelCovid package was deprecated and we are now at version 2.0.0
+Typescript support is limited but will be worked on soon!
 
 ## Installation
 
@@ -115,111 +120,6 @@ api.yesterday.continents({continent:'europe'}).then(console.log)
 ### States
 
 ```js
-<<<<<<< HEAD
-.states(); // For ALL states
-```
-
-```js
-.states('state') // For specific State.
-```
-
-```js
-.states(null, { sort: 'value' }); // for sorting.
-```
-
-```js
-.states(null, { yesterday: 'value' }); // for yesterday data.
-```
-
-```js
-.states('state', { yesterday: true }); // for specific state and yesterday data.
-```
-
-### HistoricalUSA
-
-```js
-.historicalUSA(); // for all
-```
-
-```js
-.historicalUSA('county'); // for a county;
-```
-
-### Historical
-
-```js
-.historical(); // For ALL
-```
-
-```js
-.historical(null, 'country name'); // Specific Country
-```
-
-```js
-.historical(null, 'country name', 'province name'); // Specific Country and Province
-```
-
-```js
-.historical(true); // All cases and deaths
-```
-
-### Jhucsse
-
-```js
-.jhucsse();
-
-.jhucsee(true); // Gets all the counties
-
-.jhucsee(true, 'countyname'); // for a countyname
-```
-
-### countryName
-
-```js
-.countryNames(); // All the country names which are affected.
-```
-
-### Continents
-
-```js
-.continents(); // For all.
-```
-
-```js
-.continents('continent'); // for a specific continent
-```
-
-### Same thing as countries, it has options
-
-```js
-.continents('continent'|null, { yesterday: true|false|1|0, strict: true|false, sort: 'value'})
-```
-
-### nyt
-
-```js
-.nytState()
-```
-
-```js
-.nytState('state'); // for a state
-```
-
-```js
-.nytCounties()
-```
-
-```js
-.nytCounties('county'); // for a county
-```
-
-```js
-.nytUSA();
-```
-
-
-Thanks!
-=======
 // this prints an array of US states and their data
 api.states().then(console.log)
 
@@ -334,4 +234,3 @@ api.gov().then(console.log)
 // this prints the data for a specified country
 api.gov('austria').then(console.log)
 ```
->>>>>>> 1d76a195577f5a660d2646436717826e814ef1f2
