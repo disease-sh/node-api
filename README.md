@@ -114,7 +114,6 @@ api.yesterday.continents({sort:'cases'}).then(console.log)
 
 // this prints a specified continent with yesterdays data
 api.yesterday.continents({continent:'europe'}).then(console.log)
->>>>>>> 1d76a195577f5a660d2646436717826e814ef1f2
 ```
 
 ### States
