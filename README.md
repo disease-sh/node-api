@@ -34,8 +34,6 @@ Other wrappers use node-fetch, which is way slower.
 
 All shown examples use Promises but can also await/async to fetch data using covidapi.
 
-Since 0.1.0, only /v2 endpoints are supported. Keep that in mind.
-
 ### Add to project 
 
 ```js
@@ -60,7 +58,7 @@ api.yesterday.all().then(console.log)
 ### Countries
 
 ```js
-// this prints an array of all infected countries
+// this prints 
 api.countries().then(console.log) 
 
 // this prints an array of call infected countries sorted by cases
@@ -194,7 +192,7 @@ api.historical.countries({country:'china', province:['hubei','anhui']}).then(con
 // this prints a timeline of data from the US
 api.nyt.usa().then(console.log)
 
-// this prints an array of timelines all infected US states
+// this prints an array of timelines of all infected US states
 api.nyt.states().then(console.log)
 
 // this prints a timeline of a specified US state
@@ -221,4 +219,14 @@ api.apple.mobilityData({country:'austria', subregion:'all'}).then(console.log)
 
 // this prints mobility data for multiple specified subregions of a country
 api.apple.mobilityData({country:'austria', subregion:['vienna', 'salzburg']}).then(console.log)
+```
+
+### Official Government Data
+
+```js
+// this prints a list of available country names
+api.gov().then(console.log)
+
+// this prints the data for a specified country
+api.gov('austria').then(console.log)
 ```

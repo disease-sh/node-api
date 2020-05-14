@@ -19,10 +19,11 @@ const createPath = (opts, path) => {
   }
   return path
 }
+const _all = (yesterday = false) => fetchJson(`v2/all?yesterday=${yesterday}`)
 
 const settings = (opts = {}) => ['https://disease.sh', 'https://api.caw.sh', 'https://corona.lmao.ninja'].includes(opts.baseUrl) && (curSettings.baseUrl = opts.baseUrl)
 
-const all = (yesterday = false) => fetchJson(`v2/all?yesterday=${yesterday}`)
+const all = () => _all(false)
 
 const countries = (opts = {}) => {
   let path = 'v2/countries'
@@ -45,7 +46,7 @@ const states = (opts = {}) => {
   return fetchJson(createPath(opts, path))
 }
 
-yesterday.all = () => all(true)
+yesterday.all = () => _all(true)
 
 yesterday.countries = (opts = {}) => countries({...opts, yesterday: true})
 
@@ -106,6 +107,8 @@ apple.mobilityData = (opts = {}) => {
   return fetchJson(path)
 }
 
+const gov = (country) => fetchJson(`v2/gov/${country ? country : ''}`)
+
 module.exports = {
   settings,
   all,
@@ -116,5 +119,6 @@ module.exports = {
   jhucsse,
   historical,
   nyt,
-  apple
+  apple,
+  gov
 }

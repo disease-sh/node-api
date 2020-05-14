@@ -1,5 +1,5 @@
 const api = require('./')
-require('chai').should()
+const should = require('chai').should()
 
 api.settings({baseUrl: 'https://api.caw.sh'})
 
@@ -638,7 +638,7 @@ describe('HISTORICAL', function () {
     data.should.be.a('object')
     data.should.have.property('country', 'China')
     data.should.have.property('province')
-    data.provinces.should.be.a('array')
+    data.province.should.be.a('array')
     data.should.have.property('timeline')
     data.timeline.should.be.a('object')
     data.timeline.should.have.property('cases')
@@ -654,7 +654,7 @@ describe('HISTORICAL', function () {
     data.should.be.a('object')
     data.should.have.property('country', 'China')
     data.should.have.property('province')
-    data.provinces.should.be.a('array')
+    data.province.should.be.a('array')
     data.should.have.property('timeline')
     data.timeline.should.be.a('object')
     data.timeline.should.have.property('cases')
@@ -813,6 +813,21 @@ describe('APPLE MOBILITY', function() {
         row.should.have.property('transit')
         row.should.have.property('walking')
       }
+    }
+  })
+})
+
+describe('GOVERNMENT DATA', function() {
+  it('/v2/gov', async function (){
+    const data = await api.gov()
+    data.should.be.a('array')
+  })
+
+  it('/v2/gov/*', async function (){
+    const data = await api.gov()
+    for(const country of data) {
+      const govData = await api.gov(country)
+      should.exist(govData)
     }
   })
 })
