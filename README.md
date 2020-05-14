@@ -1,7 +1,7 @@
 <div align="center">
 	<h1>NovelCovid</h1>
 	<h6>(aka covidapi)</h6>
-	<strong> <i>A NodeJs Wrapper for the <a href="https://disease.sh">novelCOVID API</a></i></strong><br><br>
+	<strong> <i>A JavaScript Wrapper for the <a href="https://disease.sh">novelCOVID API</a></i></strong><br><br>
 
 ![GitHub top language](https://img.shields.io/github/languages/top/novelcovid/node-api)
 ![Snyk Vulnerabilities for npm scoped package](https://img.shields.io/snyk/vulnerabilities/npm/novelcovid)
