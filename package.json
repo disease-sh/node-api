@@ -1,26 +1,12 @@
 {
   "name": "novelcovid",
-  "dependencies": {
-    "node-fetch": "*"
-  },
-  "scripts": {
-    "prepublishOnly": "yarn build",
-    "build": "tsc -p .",
-    "lint": "eslint --ext ts src --fix",
-    "test": "eslint --ext ts src",
-    "dev": "yarn build && node dist/test"
-  },
   "version": "1.2.7",
-  "description": "An Api wrapper to get information about the Novel CoronaVirus.",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "description": "An API wrapper to get information about Novel Coronavirus.",
   "keywords": [
     "coronavirus",
     "wrapper",
     "api"
   ],
-  "author": "EliteDaMyth",
-  "license": "GPL-3.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NovelCOVID/node-api.git"
@@ -29,12 +15,17 @@
     "url": "https://github.com/NovelCOVID/node-api/issues"
   },
   "homepage": "https://github.com/NovelCOVID/node-api#readme",
+  "main": "index.js",
+  "dependencies": {
+    "@aero/centra": "1.0.3"
+  },
   "devDependencies": {
-    "@types/node": "^13.9.5",
-    "@types/node-fetch": "^2.5.5",
-    "@typescript-eslint/eslint-plugin": "^2.25.0",
-    "@typescript-eslint/parser": "^2.25.0",
-    "eslint": "^6.8.0",
-    "typescript": "^3.8.3"
-  }
+    "chai": "4.2.0",
+    "mocha": "7.1.1"
+  },
+  "scripts": {
+    "test": "mocha ./index.spec.js --exit --t 30000"
+  },
+  "author": "puf17640",
+  "license": "WTFPL"
 }

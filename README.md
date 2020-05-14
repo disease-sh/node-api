@@ -1,140 +1,121 @@
 <div align="center">
-        <h1> NovelCovid </h1>
-    <strong> <i>View information on the Coronavirus outbreak around the world.</i></strong>
-  <br>
-  <br>
-  <a href="https://discord.gg/EvbMshU">
-    <img src="https://img.shields.io/discord/689535536934813823.svg?colorB=Blue&logo=discord&label=Support&style=for-the-badge" alt="Support"></a>
+	<h1> NovelCovid </h1>
+	<h6>(aka covidapi)</h6>
+	<strong> <i>A NodeJs Wrapper for the <a href="https://disease.sh">novelCOVID API</a></i></strong><br><br>
 
-<a href="https://github.com/NovelCOVID/node-api/actions?query=workflow%3ABuild">
-    <img src="https://img.shields.io/github/workflow/status/NovelCOVID/node-api/Build?color=green&label=Build&logo=github&logoColor=green&style=for-the-badge" alt="Build">
-</a>
+	![GitHub top language](https://img.shields.io/github/languages/top/novelcovid/node-api)
+	![Snyk Vulnerabilities for npm scoped package](https://img.shields.io/snyk/vulnerabilities/npm/novelcovid)
+	![GitHub package.json version](https://img.shields.io/github/package-json/v/novelcovid/node-api)
+	![GitHub last commit](https://img.shields.io/github/last-commit/novelcovid/node-api)<br>
+	![npm bundle size](https://img.shields.io/bundlephobia/minzip/novelcovid)
+	![npm](https://img.shields.io/npm/dw/novelcovid)<br>
+	![GitHub issues](https://img.shields.io/github/issues-raw/novelcovid/node-api)
+	![GitHub](https://img.shields.io/github/license/novelcovid/node-api)
 
-<a href="https://github.com/NovelCOVID/node-api">
-    <img src="https://img.shields.io/github/languages/top/NovelCOVID/node-api?logo=typescript&logoColor=blue&style=for-the-badge" alt="Languages">
-</a>
-<br>
-<a href="https://www.npmjs.com/package/novelcovid">
-    <img src="https://img.shields.io/npm/v/novelcovid?logo=npm&style=for-the-badge" alt="Version">
-</a>
-<a href="https://www.npmjs.com/package/novelcovid">
-	<img src="https://img.shields.io/bundlephobia/min/novelcovid?color=red&label=SIZE&logo=npm&style=for-the-badge", alt="Size">
-</a>
-<a href="https://www.npmjs.com/package/novelcovid">
-<img src="https://img.shields.io/npm/dw/novelcovid?logo=npm&style=for-the-badge", alt="Downloads">
-</a>
-<br>
-<a href="https://github.com/NovelCOVID/node-api/issues">
-    <img src="https://img.shields.io/github/issues/NovelCOVID/node-api?color=red&logo=github&logoColor=red&style=for-the-badge" alt="Issues">
-</a>
-
-<a href="https://github.com/NovelCOVID/node-api/pulls">
-    <img src="https://img.shields.io/github/issues-pr/NovelCOVID/node-api?logo=github&logoColor=brightgreen&style=for-the-badge" alt="Pull Request">
-</a>
-<a href="https://github.com/NovelCOVID/node-api/blob/master/LICENSE"><img src="https://img.shields.io/github/license/NovelCOVID/node-api?color=37f149&style=for-the-badge" alt="LICENSE">
-</a>
-<br>
-<br>
-<hr>
 </div>
-
-
+<br>
 
 ## Installation
 
-Npm:
+Using NPM:
 
 ```bash
-npm i novelcovid
+npm i -s novelcovid
 ```
 
-Yarn:
+## Remarks
 
-```bash
-yarn add novelcovid
-```
+This wrapper uses the '@aero/centra' package to send requests.
+It is way faster than any other request package other than 'http.request' package.
 
 ## Usage
 
-JavaScript:
+All shown examples use Promises but can also await/async to fetch data using NovelCovid.
+
+### Add to project 
 
 ```js
-const { NovelCovid } = require('novelcovid');
+const api = require('novelcovid');
 
-const track = new NovelCovid();
+// you can choose which URL to use, this will not change the behaviour of the API
+api.settings({
+    baseUrl: 'https://disease.sh' | 'https://api.caw.sh' | 'https://corona.lmao.ninja'
+})
 ```
 
-TypeScript:
-
-```ts
-import { NovelCovid } from 'novelcovid';
-
-const track = new NovelCovid();
-```
-
-## or 
-
-JavaScript:
+### Summary
 
 ```js
-const NovelCovid = require('novelcovid');
+// this prints a summary of global data
+api.all().then(console.log)
 
-const track = new NovelCovid();
-```
-
-TypeScript:
-
-```ts
-import NovelCovid from 'novelcovid';
-
-const track = new NovelCovid();
-```
-
-## Methods
-
-### All
-
-```js
-.all();
-```
-
-```js
-.all({ yesterday: true });
+// this prints a summary of global data with yesterdays data
+api.yesterday.all().then(console.log)
 ```
 
 ### Countries
 
 ```js
-.countries(); // for ALL.
+// this prints 
+api.countries().then(console.log) 
+
+// this prints an array of call infected countries sorted by cases
+api.countries({sort:'cases'}).then(console.log) 
+
+// this prints a specified country
+api.countries({country:'austria'}).then(console.log) 
+
+// this prints an array of specified countries
+api.countries({country:['austria','china']}).then(console.log) 
 ```
 
-```js
-.countries('country name'); // For Specific Country
-```
+### Yesterday (Countries)
 
 ```js
-.countries(null, { sort: 'value' }); // For Sorting
+// this prints an array of all infected countries with yesterdays data
+api.yesterday.countries().then(console.log)
+
+// this prints an array of all infected countries with yesterdays data sorted by todays cases
+api.yesterday.countries({sort:'cases'}).then(console.log)
+
+// this prints a specified country with yesterdays data
+api.yesterday.countries({country:'austria'}).then(console.log)
+
+// this prints an array of specified countries with yesterdays data
+api.yesterday.countries({country:['austria','china']}).then(console.log)
 ```
 
-```js
-.countries(null, { sort: 'value', yesterday: true|false|1|0 }); // For Sorting and yesterday data.
-```
+### Continents
 
 ```js
-.countries(null, { strict: true|false }); // For Strict
+// this prints an array of all infected continents
+api.continents().then(console.log) 
+
+// this prints an array of all infected continents sorted by cases
+api.continents({sort:'cases'}).then(console.log) 
+
+// this prints a specified continent
+api.continents({continent:'europe'}).then(console.log)
 ```
 
-```js
-.countries(null, { yesterday: true|false|1|0 }); // For yesterday data.
-```
+### Yesterday (Continents)
 
 ```js
-.countries(null, { yesterday: true|false|1|0, strict: true|false }); // For yesterday data and strict.
+// this prints an array of all infected continents with yesterdays data
+api.yesterday.continents().then(console.log)
+
+// this prints an array of all infected continents with yesterdays data sorted by todays cases
+api.yesterday.continents({sort:'cases'}).then(console.log)
+
+// this prints a specified continent with yesterdays data
+api.yesterday.continents({continent:'europe'}).then(console.log)
+>>>>>>> 1d76a195577f5a660d2646436717826e814ef1f2
 ```
 
 ### States
 
 ```js
+<<<<<<< HEAD
 .states(); // For ALL states
 ```
 
@@ -238,3 +219,119 @@ const track = new NovelCovid();
 
 
 Thanks!
+=======
+// this prints an array of US states and their data
+api.states().then(console.log)
+
+// this prints an array of US states and their data sorted by cases
+api.states({sort:'cases'}).then(console.log)
+
+// this prints a specified state and its data
+api.states({state:'michigan'}).then(console.log)
+
+// this prints an array of specified states and their data
+api.states({state:['michigan','new york']}).then(console.log)
+```
+
+### Yesterday (States)
+
+```js
+// this prints an array of US states with yesterdays data
+api.yesterday.states().then(console.log)
+
+// this prints an array of US states with yesterdays data sorted by cases
+api.yesterday.states({sort:'cases'}).then(console.log)
+
+// this prints a specified state with yesterdays data
+api.yesterday.states({state:'michigan'}).then(console.log)
+
+// this prints an array of specified states with yesterdays data
+api.yesterday.states({state:['michigan','new york']}).then(console.log)
+```
+
+### JHUCSSE
+
+```js
+// this prints an array of infected countries
+api.jhucsse.all().then(console.log)
+
+// this prints an array of infected US counties 
+api.jhucsse.counties().then(console.log)
+
+// this prints an array of infected provinces of a specified US county 
+api.jhucsse.counties({county:'abbeville'}).then(console.log)
+
+// this prints an object with the counties provinces as arrays
+api.jhucsse.counties({county:['abbeville','acadia']}).then(console.log)
+```
+
+### Historical
+
+```js
+// this prints the global timeline
+api.historical.all().then(console.log)
+
+// this prints the global timeline for the last 10 days (use -1 to get all data)
+api.historical.all().then(console.log)
+
+// this prints an array of infected countries and their timeline
+api.historical.countries().then(console.log)
+
+// this prints a specified country and its timeline
+api.historical.countries({country:'china'}).then(console.log)
+
+// this prints a specified country and its timeline for the last 10 days (use -1 to get all data)
+api.historical.countries({country:'china', days:10}).then(console.log)
+
+// this prints a specified province of a specified country and its timeline
+api.historical.countries({country:'china', province:'hubei'}).then(console.log)
+
+// this prints a specified province of a specified country and its timeline
+api.historical.countries({country:'china', province:['hubei','anhui']}).then(console.log)
+```
+
+### New York Times Data (USA)
+
+```js
+// this prints a timeline of data from the US
+api.nyt.usa().then(console.log)
+
+// this prints an array of timelines of all infected US states
+api.nyt.states().then(console.log)
+
+// this prints a timeline of a specified US state
+api.nyt.states({state:'illinois'}).then(console.log)
+
+// this prints an array of timelines all infected US counties
+api.nyt.counties().then(console.log)
+
+// this prints an array of timelines of states of a specified US county
+api.nyt.counties({county:'cook'}).then(console.log)
+```
+
+### Mobility Data (Apple)
+
+```js
+// this prints a list of available country names
+api.apple.countries().then(console.log)
+
+// this prints a list of available subregions for a specified country
+api.apple.subregions('austria').then(console.log)
+
+// this prints mobility data for a specified subregion of a country, all is used to query total data
+api.apple.mobilityData({country:'austria', subregion:'all'}).then(console.log)
+
+// this prints mobility data for multiple specified subregions of a country
+api.apple.mobilityData({country:'austria', subregion:['vienna', 'salzburg']}).then(console.log)
+```
+
+### Official Government Data
+
+```js
+// this prints a list of available country names
+api.gov().then(console.log)
+
+// this prints the data for a specified country
+api.gov('austria').then(console.log)
+```
+>>>>>>> 1d76a195577f5a660d2646436717826e814ef1f2
