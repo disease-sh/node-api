@@ -637,7 +637,7 @@ describe('HISTORICAL', function () {
     const data = await api.historical.countries({country:'china'})
     data.should.be.a('object')
     data.should.have.property('country', 'China')
-    data.should.have.property('provinces')
+    data.should.have.property('province')
     data.provinces.should.be.a('array')
     data.should.have.property('timeline')
     data.timeline.should.be.a('object')
@@ -653,7 +653,7 @@ describe('HISTORICAL', function () {
     const data = await api.historical.countries({country:'china', days:10})
     data.should.be.a('object')
     data.should.have.property('country', 'China')
-    data.should.have.property('provinces')
+    data.should.have.property('province')
     data.provinces.should.be.a('array')
     data.should.have.property('timeline')
     data.timeline.should.be.a('object')
@@ -783,8 +783,8 @@ describe('APPLE MOBILITY', function() {
   it('/v2/apple/countries/austria/vienna', async function () {
     const data = await api.apple.mobilityData({country:'austria', subregion: 'vienna'})
     data.should.be.a('object')
-    //data.should.have.property('country')
-    data.should.have.property('subregion', 'vienna')
+    data.should.have.property('country', 'Austria')
+    data.should.have.property('subregion', 'Vienna')
     data.should.have.property('data')
     data.data.should.be.a('array')
     for(let row of data.data){
