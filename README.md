@@ -61,7 +61,7 @@ api.yesterday.all().then(console.log)
 ### Countries
 
 ```js
-// this prints 
+// this prints an array of call infected countries
 api.countries().then(console.log) 
 
 // this prints an array of call infected countries sorted by cases
