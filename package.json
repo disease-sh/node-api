@@ -24,6 +24,7 @@
     "mocha": "7.1.1"
   },
   "scripts": {
+    "declaration": "rm -f index.d.ts && tsc", 
     "test": "mocha ./index.spec.js --exit --t 30000"
   },
   "author": "puf17640",
