@@ -33,6 +33,8 @@ npm i -s novelcovid
 This wrapper uses the '@aero/centra' package to send requests.
 It is way faster than any other request package other than 'http.request' package.
 
+The **allowNull** parameter is now available for the `v2/all`, `v2/countries`, `v2/continents`, `v2/states` and `v2/gov` endpoints. 
+
 ## Usage
 
 All shown examples use Promises but can also await/async to fetch data using NovelCovid.
