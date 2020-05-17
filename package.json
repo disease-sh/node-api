@@ -21,7 +21,8 @@
   },
   "devDependencies": {
     "chai": "4.2.0",
-    "mocha": "7.1.1"
+    "mocha": "7.1.1",
+    "typescript": "3.9.2"
   },
   "scripts": {
     "declaration": "rm -f index.d.ts && tsc", 

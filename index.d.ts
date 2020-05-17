@@ -14,42 +14,42 @@ export function all(): object;
 /**
  * Retrieve country specific data
  * @param {object}               opts         object holding the options for that request
- * @param {string|Array<string>} opts.country country name/s to be queried
+ * @param {string|string[]} opts.country country name/s to be queried
  * @param {string}               opts.sort    property name which will be used for sorting
  * @param {boolean}              opts.strict  whether to use strict name checking or not
- * @returns {object|Array<object>}            country specific data
+ * @returns {object|object[]}            country specific data
  */
 export function countries(opts?: {
-    country: string | Array<string>;
+    country: string | string[];
     sort: string;
     strict: boolean;
-}): object | Array<object>;
+}): object | object[];
 /**
  * Retrieve continent specific data
  * @param {object}               opts           object holding the options for that request
- * @param {string|Array<string>} opts.continent continent name/s to be queried
+ * @param {string|string[]} opts.continent continent name/s to be queried
  * @param {string}               opts.sort      property name which will be used for sorting
  * @param {boolean}              opts.strict    whether to use strict name checking or not
- * @returns {object|Array<object>}              continent specific data
+ * @returns {object|object[]}              continent specific data
  */
 export function continents(opts?: {
-    continent: string | Array<string>;
+    continent: string | string[];
     sort: string;
     strict: boolean;
-}): object | Array<object>;
+}): object | object[];
 /**
  * Retrieve state specific data
  * @param {object}               opts           object holding the options for that request
- * @param {string|Array<string>} opts.state     state name/s to be queried
+ * @param {string|string[]} opts.state     state name/s to be queried
  * @param {string}               opts.sort      property name which will be used for sorting
  * @param {boolean}              opts.strict    whether to use strict name checking or not
- * @returns {object|Array<object>}              state specific data
+ * @returns {object|object[]}              state specific data
  */
 export function states(opts?: {
-    state: string | Array<string>;
+    state: string | string[];
     sort: string;
     strict: boolean;
-}): object | Array<object>;
+}): object | object[];
 export namespace yesterday {
     export function all(): object;
     export function countries(opts?: {
