@@ -8,18 +8,20 @@ const fetch = require('@aero/centra'),
       apple = {}
 
 const createPath = (opts, path) => {
-  if(opts.sort || typeof(opts.strict) === 'boolean' || opts.yesterday) {
+  if(opts.sort || String(opts.strict) !== 'undefined' || opts.yesterday || String(opts.allowNull) !== 'undefined') {
     path += '?'
     if(opts.sort) 
       path += `sort=${opts.sort}`
     if(opts.yesterday)
       path += (opts.sort ?'&':'')+'yesterday='+opts.yesterday
-    if(typeof(opts.strict) === 'boolean') 
-      path += (opts.sort || opts.yesterday ?'&':'')+'strict='+opts.strict
+    if(String(opts.allowNull) !== 'undefined')
+      path += (opts.sort || opts.yesterday ?'&':'')+'allowNull='+opts.yesterday
+    if(String(opts.strict) !== 'undefined') 
+      path += (opts.sort || opts.yesterday || String(opts.allowNull) !== 'undefined' ?'&':'')+'strict='+opts.strict
   }
   return path
 }
-const _all = (yesterday = false) => fetchJson(`v2/all?yesterday=${yesterday}`)
+const _all = (opts) => fetchJson(createPath(opts, `v2/all`))
 
 /**
  * Specify settings to the wrapper
@@ -30,9 +32,11 @@ const settings = (opts = {}) => ['https://disease.sh', 'https://api.caw.sh', 'ht
 
 /**
  * Retrieve a summary of global data
- * @returns {object} summary object
+ * @param {object} opts             object holding the options for that request
+ * @param {boolean} opts.allowNull  whether to allow null values (true) or automatically transform them to 0 (false)
+ * @returns {object}                summary object
  */
-const all = () => _all(false)
+const all = (opts = {}) => _all(false, opts)
 
 /**
  * Retrieve country specific data
@@ -81,9 +85,11 @@ const states = (opts = {}) => {
 
 /**
  * Retrieve a summary of yesterdays global data
- * @returns {object} summary object
+ * @param {object} opts             object holding the options for that request
+ * @param {boolean} opts.allowNull  whether to allow null values (true) or automatically transform them to 0 (false)
+ * @returns {object}                summary object
  */
-yesterday.all = () => _all(true)
+yesterday.all = (opts = {}) => _all({...opts, yesterday: true})
 
 /**
  * Retrieve yesterdays country specific data
