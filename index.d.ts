@@ -8,52 +8,65 @@ export function settings(opts?: {
 }): string | false;
 /**
  * Retrieve a summary of global data
- * @returns {object} summary object
+ * @param {object} opts             object holding the options for that request
+ * @param {boolean} opts.allowNull  whether to allow null values (true) or automatically transform them to 0 (false)
+ * @returns {object}                summary object
  */
-export function all(): object;
+export function all(opts?: {
+    allowNull: boolean;
+}): object;
 /**
  * Retrieve country specific data
- * @param {object}               opts         object holding the options for that request
- * @param {string|string[]} opts.country country name/s to be queried
- * @param {string}               opts.sort    property name which will be used for sorting
- * @param {boolean}              opts.strict  whether to use strict name checking or not
- * @returns {object|object[]}            country specific data
+ * @param {object}               opts            object holding the options for that request
+ * @param {string|string[]}      opts.country    country name/s to be queried
+ * @param {boolean}              opts.allowNull  whether to allow null values (true) or automatically transform them to 0 (false)
+ * @param {string}               opts.sort       property name which will be used for sorting
+ * @param {boolean}              opts.strict     whether to use strict name checking or not
+ * @returns {object|object[]}                    country specific data
  */
 export function countries(opts?: {
     country: string | string[];
+    allowNull: boolean;
     sort: string;
     strict: boolean;
 }): object | object[];
 /**
  * Retrieve continent specific data
- * @param {object}               opts           object holding the options for that request
- * @param {string|string[]} opts.continent continent name/s to be queried
- * @param {string}               opts.sort      property name which will be used for sorting
- * @param {boolean}              opts.strict    whether to use strict name checking or not
- * @returns {object|object[]}              continent specific data
+ * @param {object}               opts            object holding the options for that request
+ * @param {string|string[]}      opts.continent  continent name/s to be queried
+ * @param {boolean}              opts.allowNull  whether to allow null values (true) or automatically transform them to 0 (false)
+ * @param {string}               opts.sort       property name which will be used for sorting
+ * @param {boolean}              opts.strict     whether to use strict name checking or not
+ * @returns {object|object[]}                    continent specific data
  */
 export function continents(opts?: {
     continent: string | string[];
+    allowNull: boolean;
     sort: string;
     strict: boolean;
 }): object | object[];
 /**
  * Retrieve state specific data
- * @param {object}               opts           object holding the options for that request
- * @param {string|string[]} opts.state     state name/s to be queried
- * @param {string}               opts.sort      property name which will be used for sorting
- * @param {boolean}              opts.strict    whether to use strict name checking or not
- * @returns {object|object[]}              state specific data
+ * @param {object}               opts            object holding the options for that request
+ * @param {string|string[]}      opts.state      state name/s to be queried
+ * @param {boolean}              opts.allowNull  whether to allow null values (true) or automatically transform them to 0 (false)
+ * @param {string}               opts.sort       property name which will be used for sorting
+ * @param {boolean}              opts.strict     whether to use strict name checking or not
+ * @returns {object|object[]}                    state specific data
  */
 export function states(opts?: {
     state: string | string[];
+    allowNull: boolean;
     sort: string;
     strict: boolean;
 }): object | object[];
 export namespace yesterday {
-    export function all(): object;
+    export function all(opts?: {
+        allowNull: boolean;
+    }): object;
     export function countries(opts?: {
         country: string | string[];
+        allowNull: boolean;
         sort: string;
         strict: boolean;
     }): object | object[];
@@ -64,6 +77,7 @@ export namespace yesterday {
     }): object | object[];
     export function states(opts?: {
         state: string | string[];
+        allowNull: boolean;
         sort: string;
         strict: boolean;
     }): object | object[];
@@ -103,7 +117,8 @@ export namespace apple {
 }
 /**
  * Retrieve official government data
- * @param {string}  country country name to be queried (empty to get an array of names)
- * @returns {object}        official government data
+ * @param {string}  country         country name to be queried (empty to get an array of names)
+ * @param {boolean} opts.allowNull  whether to allow null values (true) or automatically transform them to 0 (false)
+ * @returns {object}                official government data
  */
 export function gov(country: string): object;

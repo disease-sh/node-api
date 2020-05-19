@@ -40,11 +40,12 @@ const all = (opts = {}) => _all(false, opts)
 
 /**
  * Retrieve country specific data
- * @param {object}               opts         object holding the options for that request
- * @param {string|string[]} opts.country country name/s to be queried      
- * @param {string}               opts.sort    property name which will be used for sorting     
- * @param {boolean}              opts.strict  whether to use strict name checking or not
- * @returns {object|object[]}            country specific data
+ * @param {object}               opts            object holding the options for that request
+ * @param {string|string[]}      opts.country    country name/s to be queried      
+ * @param {boolean}              opts.allowNull  whether to allow null values (true) or automatically transform them to 0 (false)
+ * @param {string}               opts.sort       property name which will be used for sorting     
+ * @param {boolean}              opts.strict     whether to use strict name checking or not
+ * @returns {object|object[]}                    country specific data
  */
 const countries = (opts = {}) => {
   let path = 'v2/countries'
@@ -55,11 +56,12 @@ const countries = (opts = {}) => {
 
 /**
  * Retrieve continent specific data
- * @param {object}               opts           object holding the options for that request
- * @param {string|string[]} opts.continent continent name/s to be queried      
- * @param {string}               opts.sort      property name which will be used for sorting     
- * @param {boolean}              opts.strict    whether to use strict name checking or not
- * @returns {object|object[]}              continent specific data
+ * @param {object}               opts            object holding the options for that request
+ * @param {string|string[]}      opts.continent  continent name/s to be queried      
+ * @param {boolean}              opts.allowNull  whether to allow null values (true) or automatically transform them to 0 (false)
+ * @param {string}               opts.sort       property name which will be used for sorting     
+ * @param {boolean}              opts.strict     whether to use strict name checking or not
+ * @returns {object|object[]}                    continent specific data
  */
 const continents = (opts = {}) => {
   let path = 'v2/continents'
@@ -70,11 +72,12 @@ const continents = (opts = {}) => {
 
 /**
  * Retrieve state specific data
- * @param {object}               opts           object holding the options for that request
- * @param {string|string[]} opts.state     state name/s to be queried      
- * @param {string}               opts.sort      property name which will be used for sorting     
- * @param {boolean}              opts.strict    whether to use strict name checking or not
- * @returns {object|object[]}              state specific data
+ * @param {object}               opts            object holding the options for that request
+ * @param {string|string[]}      opts.state      state name/s to be queried      
+ * @param {boolean}              opts.allowNull  whether to allow null values (true) or automatically transform them to 0 (false)
+ * @param {string}               opts.sort       property name which will be used for sorting     
+ * @param {boolean}              opts.strict     whether to use strict name checking or not
+ * @returns {object|object[]}                    state specific data
  */
 const states = (opts = {}) => {
   let path = 'v2/states'
@@ -93,18 +96,19 @@ yesterday.all = (opts = {}) => _all({...opts, yesterday: true})
 
 /**
  * Retrieve yesterdays country specific data
- * @param {object}               opts         object holding the options for that request
- * @param {string|string[]} opts.country country name/s to be queried      
- * @param {string}               opts.sort    property name which will be used for sorting     
- * @param {boolean}              opts.strict  whether to use strict name checking or not
- * @returns {object|object[]}            country specific data
+ * @param {object}               opts            object holding the options for that request
+ * @param {string|string[]}      opts.country    country name/s to be queried      
+ * @param {boolean}              opts.allowNull  whether to allow null values (true) or automatically transform them to 0 (false)
+ * @param {string}               opts.sort       property name which will be used for sorting     
+ * @param {boolean}              opts.strict     whether to use strict name checking or not
+ * @returns {object|object[]}                    country specific data
  */
 yesterday.countries = (opts = {}) => countries({...opts, yesterday: true})
 
 /**
  * Retrieve yesterdays continent specific data
  * @param {object}               opts           object holding the options for that request
- * @param {string|string[]} opts.continent continent name/s to be queried      
+ * @param {string|string[]}      opts.continent continent name/s to be queried      
  * @param {string}               opts.sort      property name which will be used for sorting     
  * @param {boolean}              opts.strict    whether to use strict name checking or not
  * @returns {object|object[]}              continent specific data
@@ -113,11 +117,12 @@ yesterday.continents = (opts = {}) => continents({...opts, yesterday: true})
 
 /**
  * Retrieve yesterdays state specific data
- * @param {object}               opts           object holding the options for that request
- * @param {string|string[]} opts.state     state name/s to be queried      
- * @param {string}               opts.sort      property name which will be used for sorting     
- * @param {boolean}              opts.strict    whether to use strict name checking or not
- * @returns {object|object[]}              state specific data
+ * @param {object}               opts            object holding the options for that request
+ * @param {string|string[]}      opts.state      state name/s to be queried      
+ * @param {boolean}              opts.allowNull  whether to allow null values (true) or automatically transform them to 0 (false)
+ * @param {string}               opts.sort       property name which will be used for sorting     
+ * @param {boolean}              opts.strict     whether to use strict name checking or not
+ * @returns {object|object[]}                    state specific data
  */
 yesterday.states = (opts = {}) => states({...opts, yesterday: true})
 
@@ -129,9 +134,9 @@ jhucsse.all = () => fetchJson('v2/jhucsse')
 
 /**
  * Retrieve county specific data
- * @param {object}               opts           object holding the options for that request
- * @param {string|string[]} opts.county    county name/s to be queried      
- * @returns {object|object[]}              county specific data
+ * @param {object}           opts        object holding the options for that request
+ * @param {string|string[]}  opts.county county name/s to be queried      
+ * @returns {object|object[]}            county specific data
  */
 jhucsse.counties = (opts = {}) => {
   let path = 'v2/jhucsse/counties'
@@ -232,8 +237,9 @@ apple.mobilityData = (opts = {}) => {
 
 /**
  * Retrieve official government data
- * @param {string}  country country name to be queried (empty to get an array of names)
- * @returns {object}        official government data
+ * @param {string}  country         country name to be queried (empty to get an array of names)
+ * @param {boolean} opts.allowNull  whether to allow null values (true) or automatically transform them to 0 (false)
+ * @returns {object}                official government data
  */
 const gov = (country) => fetchJson(`v2/gov/${country ? country : ''}`)
 

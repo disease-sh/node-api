@@ -1,6 +1,6 @@
 {
   "name": "novelcovid",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "An API wrapper to get information about Novel Coronavirus.",
   "keywords": [
     "coronavirus",
@@ -25,7 +25,7 @@
     "typescript": "3.9.2"
   },
   "scripts": {
-    "declaration": "rm -f index.d.ts && tsc", 
+    "declaration": "rm -f index.d.ts && tsc",
     "test": "mocha ./index.spec.js --exit --t 30000"
   },
   "author": "puf17640",
