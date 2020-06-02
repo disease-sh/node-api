@@ -58,6 +58,9 @@ api.all().then(console.log)
 
 // this prints a summary of global data with yesterdays data
 api.yesterday.all().then(console.log)
+
+// this prints a summary of global data with data from two days ago
+api.twoDaysAgo.all().then(console.log)
 ```
 
 ### Countries
@@ -92,6 +95,22 @@ api.yesterday.countries({country:'austria'}).then(console.log)
 api.yesterday.countries({country:['austria','china']}).then(console.log)
 ```
 
+### Two Days Ago (Countries)
+
+```js
+// this prints an array of all infected countries with data from two days ago
+api.twoDaysAgo.countries().then(console.log)
+
+// this prints an array of all infected countries with data from two days ago sorted by todays cases
+api.twoDaysAgo.countries({sort:'cases'}).then(console.log)
+
+// this prints a specified country with data from two days ago
+api.twoDaysAgo.countries({country:'austria'}).then(console.log)
+
+// this prints an array of specified countries with data from two days ago
+api.twoDaysAgo.countries({country:['austria','china']}).then(console.log)
+```
+
 ### Continents
 
 ```js
@@ -116,6 +135,19 @@ api.yesterday.continents({sort:'cases'}).then(console.log)
 
 // this prints a specified continent with yesterdays data
 api.yesterday.continents({continent:'europe'}).then(console.log)
+```
+
+### Two Days Ago (Continents)
+
+```js
+// this prints an array of all infected continents with data from two days ago
+api.twoDaysAgo.continents().then(console.log)
+
+// this prints an array of all infected continents with data from two days ago sorted by todays cases
+api.twoDaysAgo.continents({sort:'cases'}).then(console.log)
+
+// this prints a specified continent with data from two days ago
+api.twoDaysAgo.continents({continent:'europe'}).then(console.log)
 ```
 
 ### States

@@ -1,11 +1,7 @@
 const fetch = require('@aero/centra'),
       curSettings = { baseUrl: 'https://disease.sh' },
       fetchJson = (path) => fetch(`${curSettings.baseUrl}/${path}`).json(),
-      yesterday = {},
-      jhucsse = {},
-      historical = {},
-      nyt = {},
-      apple = {}
+      yesterday = {}, twoDaysAgo = {}, jhucsse = {}, historical = {}, nyt = {}, apple = {}
 
 const createPath = (opts, path) => {
   if(opts.sort || String(opts.strict) !== 'undefined' || opts.yesterday || String(opts.allowNull) !== 'undefined') {
@@ -14,10 +10,12 @@ const createPath = (opts, path) => {
       path += `sort=${opts.sort}`
     if(opts.yesterday)
       path += (opts.sort ?'&':'')+'yesterday='+opts.yesterday
+    if(opts.twoDaysAgo)
+      path += (opts.sort || opts.yesterday ?'&':'')+'twoDaysAgo='+opts.twoDaysAgo
     if(String(opts.allowNull) !== 'undefined')
-      path += (opts.sort || opts.yesterday ?'&':'')+'allowNull='+opts.yesterday
+      path += (opts.sort || opts.yesterday || opts.twoDaysAgo ?'&':'')+'allowNull='+opts.yesterday
     if(String(opts.strict) !== 'undefined') 
-      path += (opts.sort || opts.yesterday || String(opts.allowNull) !== 'undefined' ?'&':'')+'strict='+opts.strict
+      path += (opts.sort || opts.yesterday || opts.twoDaysAgo || String(opts.allowNull) !== 'undefined' ?'&':'')+'strict='+opts.strict
   }
   return path
 }
@@ -111,7 +109,7 @@ yesterday.countries = (opts = {}) => countries({...opts, yesterday: true})
  * @param {string|string[]}      opts.continent continent name/s to be queried      
  * @param {string}               opts.sort      property name which will be used for sorting     
  * @param {boolean}              opts.strict    whether to use strict name checking or not
- * @returns {object|object[]}              continent specific data
+ * @returns {object|object[]}                   continent specific data
  */
 yesterday.continents = (opts = {}) => continents({...opts, yesterday: true})
 
@@ -125,6 +123,35 @@ yesterday.continents = (opts = {}) => continents({...opts, yesterday: true})
  * @returns {object|object[]}                    state specific data
  */
 yesterday.states = (opts = {}) => states({...opts, yesterday: true})
+
+/**
+ * Retrieve a summary of global data from two days ago
+ * @param {object} opts             object holding the options for that request
+ * @param {boolean} opts.allowNull  whether to allow null values (true) or automatically transform them to 0 (false)
+ * @returns {object}                summary object
+ */
+twoDaysAgo.all = (opts = {}) => _all({...opts, twoDaysAgo: true})
+
+/**
+ * Retrieve country specific data from two days ago
+ * @param {object}               opts            object holding the options for that request
+ * @param {string|string[]}      opts.country    country name/s to be queried      
+ * @param {boolean}              opts.allowNull  whether to allow null values (true) or automatically transform them to 0 (false)
+ * @param {string}               opts.sort       property name which will be used for sorting     
+ * @param {boolean}              opts.strict     whether to use strict name checking or not
+ * @returns {object|object[]}                    country specific data
+ */
+twoDaysAgo.countries = (opts = {}) => countries({...opts, twoDaysAgo: true})
+
+/**
+ * Retrieve continent specific data from two days ago
+ * @param {object}               opts           object holding the options for that request
+ * @param {string|string[]}      opts.continent continent name/s to be queried      
+ * @param {string}               opts.sort      property name which will be used for sorting     
+ * @param {boolean}              opts.strict    whether to use strict name checking or not
+ * @returns {object|object[]}                   continent specific data
+ */
+twoDaysAgo.continents = (opts = {}) => continents({...opts, twoDaysAgo: true})
 
 /**
  * Retrieve an array of infected countries
@@ -222,8 +249,8 @@ apple.subregions = (country) => fetchJson(`v2/apple/countries/${country}`)
  * Retrieve mobility data for a specific country and subregion
  * @param {object}               opts           object holding the options for that request
  * @param {string}               opts.country   country name to be queried      
- * @param {string|string[]} opts.subregion subregion name/s to be queried      
- * @returns {object|object[]}              mobility data
+ * @param {string|string[]}      opts.subregion subregion name/s to be queried      
+ * @returns {object|object[]}                   mobility data
  */
 apple.mobilityData = (opts = {}) => {
   let path = 'v2/apple/countries'
@@ -250,6 +277,7 @@ module.exports = {
   continents,
   states,
   yesterday,
+  twoDaysAgo,
   jhucsse,
   historical,
   nyt,
