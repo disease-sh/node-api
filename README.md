@@ -22,6 +22,8 @@ Typescript support is limited but will be worked on soon!
 
 ## Installation
 
+[![NPM](https://nodei.co/npm/novelcovid.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/novelcovid/)
+
 Using NPM:
 
 ```bash
