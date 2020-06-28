@@ -1,7 +1,7 @@
 const api = require('./')
 const should = require('chai').should()
 
-api.settings({baseUrl: 'https://api.caw.sh'})
+api.settings({baseUrl: 'http://localhost:3000'})
 
 describe('DEFAULT', function () {
   it('/all', async function () {
@@ -322,8 +322,11 @@ describe('DEFAULT', function () {
 
   it('/yesterday/all', async function () {
     const data = await api.yesterday.all()
+    const data2 = await api.all()
     data.should.be.a('object')
     data.should.have.property('cases')
+    data2.should.have.property('cases')
+    data.cases.should.be.at.most(data2.cases)
     data.should.have.property('todayCases')
     data.should.have.property('deaths')
     data.should.have.property('todayDeaths')

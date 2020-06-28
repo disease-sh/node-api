@@ -26,7 +26,7 @@ const _all = (opts) => fetchJson(createPath(opts, `v2/all`))
  * @param {object} opts         object holding the options
  * @param {string} opts.baseUrl url to use for requests
  */
-const settings = (opts = {}) => ['https://disease.sh', 'https://api.caw.sh', 'https://corona.lmao.ninja'].includes(opts.baseUrl) && (curSettings.baseUrl = opts.baseUrl)
+const settings = (opts = {}) => (curSettings.baseUrl = opts.baseUrl)
 
 /**
  * Retrieve a summary of global data
@@ -34,7 +34,7 @@ const settings = (opts = {}) => ['https://disease.sh', 'https://api.caw.sh', 'ht
  * @param {boolean} opts.allowNull  whether to allow null values (true) or automatically transform them to 0 (false)
  * @returns {object}                summary object
  */
-const all = (opts = {}) => _all(false, opts)
+const all = (opts = {}) => _all({...opts, yesterday: false})
 
 /**
  * Retrieve country specific data
