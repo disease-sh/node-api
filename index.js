@@ -19,7 +19,7 @@ const createPath = (opts, path) => {
   }
   return path
 }
-const _all = (opts) => fetchJson(createPath(opts, `v2/all`))
+const _all = (opts) => fetchJson(createPath(opts, `v3/covid-19/all`))
 
 /**
  * Specify settings to the wrapper
@@ -46,7 +46,7 @@ const all = (opts = {}) => _all({...opts, yesterday: false})
  * @returns {object|object[]}                    country specific data
  */
 const countries = (opts = {}) => {
-  let path = 'v2/countries'
+  let path = 'v3/covid-19/countries'
   if(opts.country) 
     path += `/${Array.isArray(opts.country) ? (opts.country.join('|')) : opts.country}`
   return fetchJson(createPath(opts, path))
@@ -62,7 +62,7 @@ const countries = (opts = {}) => {
  * @returns {object|object[]}                    continent specific data
  */
 const continents = (opts = {}) => {
-  let path = 'v2/continents'
+  let path = 'v3/covid-19/continents'
   if(opts.continent) 
     path += `/${opts.continent}`
   return fetchJson(createPath(opts, path))
@@ -78,7 +78,7 @@ const continents = (opts = {}) => {
  * @returns {object|object[]}                    state specific data
  */
 const states = (opts = {}) => {
-  let path = 'v2/states'
+  let path = 'v3/covid-19/states'
   if(opts.state) 
     path += `/${Array.isArray(opts.state) ? (opts.state.join('|')) : opts.state}`
   return fetchJson(createPath(opts, path))
@@ -157,7 +157,7 @@ twoDaysAgo.continents = (opts = {}) => continents({...opts, twoDaysAgo: true})
  * Retrieve an array of infected countries
  * @returns {object[]} array of infected countries
  */
-jhucsse.all = () => fetchJson('v2/jhucsse')
+jhucsse.all = () => fetchJson('v3/covid-19/jhucsse')
 
 /**
  * Retrieve county specific data
@@ -166,7 +166,7 @@ jhucsse.all = () => fetchJson('v2/jhucsse')
  * @returns {object|object[]}            county specific data
  */
 jhucsse.counties = (opts = {}) => {
-  let path = 'v2/jhucsse/counties'
+  let path = 'v3/covid-19/jhucsse/counties'
   if(opts.county) 
     path += `/${Array.isArray(opts.county) ? (opts.county.join('|')) : opts.county}`
   return fetchJson(path)
@@ -178,7 +178,7 @@ jhucsse.counties = (opts = {}) => {
  * @param {string|number} opts.days   the number of days to get data for, or 'all'
  * @returns {object[]}           timeline data
  */
-historical.all = (opts = {}) => fetchJson(`v2/historical/all${opts.days ? `?lastdays=${opts.days}`:''}`)
+historical.all = (opts = {}) => fetchJson(`v3/covid-19/historical/all${opts.days ? `?lastdays=${opts.days}`:''}`)
 
 /**
  * Retrieve an array of the country specific timelines
@@ -189,7 +189,7 @@ historical.all = (opts = {}) => fetchJson(`v2/historical/all${opts.days ? `?last
  * @returns {object[]}                     timeline data
  */
 historical.countries = (opts = {}) => {
-  let path = 'v2/historical'
+  let path = 'v3/covid-19/historical'
   if(opts.country) {
     path += `/${Array.isArray(opts.country) ? (opts.country.join('|')) : opts.country}`
     if(opts.province) 
@@ -204,7 +204,7 @@ historical.countries = (opts = {}) => {
  * Retrieve a timeline of USA data
  * @returns {object[]} USA timeline data
  */
-nyt.usa = () => fetchJson('v2/nyt/usa')
+nyt.usa = () => fetchJson('v3/covid-19/nyt/usa')
 
 /**
  * Retrieve a timeline of US state specific data
@@ -213,7 +213,7 @@ nyt.usa = () => fetchJson('v2/nyt/usa')
  * @returns {object|object[]} state specific timeline data
  */
 nyt.states = (opts = {}) => {
-  let path = 'v2/nyt/states'
+  let path = 'v3/covid-19/nyt/states'
   if(opts.state) 
     path += `/${opts.state}`
   return fetchJson(path)
@@ -226,7 +226,7 @@ nyt.states = (opts = {}) => {
  * @returns {object|object[]} county specific timeline data
  */
 nyt.counties = (opts = {}) => {
-  let path = 'v2/nyt/counties'
+  let path = 'v3/covid-19/nyt/counties'
   if(opts.county) 
     path += `/${opts.county}`
   return fetchJson(path)
@@ -236,14 +236,14 @@ nyt.counties = (opts = {}) => {
  * Retrieve an array of available countries
  * @returns {string[]} country names
  */
-apple.countries = () => fetchJson('v2/apple/countries')
+apple.countries = () => fetchJson('v3/covid-19/apple/countries')
 
 /**
  * Retrieve a list of available subregions for a country
  * @param {string} country country name to be queried
  * @returns {object}       object containing country name and list of subregions
  */
-apple.subregions = (country) => fetchJson(`v2/apple/countries/${country}`)
+apple.subregions = (country) => fetchJson(`v3/covid-19/apple/countries/${country}`)
 
 /**
  * Retrieve mobility data for a specific country and subregion
@@ -253,7 +253,7 @@ apple.subregions = (country) => fetchJson(`v2/apple/countries/${country}`)
  * @returns {object|object[]}                   mobility data
  */
 apple.mobilityData = (opts = {}) => {
-  let path = 'v2/apple/countries'
+  let path = 'v3/covid-19/apple/countries'
   if(opts.country) {
     path += `/${opts.country}`
     if(opts.subregion) 
@@ -268,7 +268,7 @@ apple.mobilityData = (opts = {}) => {
  * @param {boolean} opts.allowNull  whether to allow null values (true) or automatically transform them to 0 (false)
  * @returns {object}                official government data
  */
-const gov = (country) => fetchJson(`v2/gov/${country ? country : ''}`)
+const gov = (country) => fetchJson(`v3/covid-19/gov/${country ? country : ''}`)
 
 module.exports = {
   settings,

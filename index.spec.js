@@ -1,7 +1,7 @@
 const api = require('./')
 const should = require('chai').should()
 
-api.settings({baseUrl: 'http://localhost:3000'})
+//api.settings({baseUrl: 'http://localhost:3000'})
 
 describe('DEFAULT', function () {
   it('/all', async function () {

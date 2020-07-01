@@ -16,9 +16,7 @@
 <br>
 
 ## Disclaimer
-
-The old NovelCovid package was deprecated and we are now at version 2.0.0 <br>
-Typescript support is limited but will be worked on soon!
+This wrapper is only for COVID-19 related data from the [Open Disease API](https://disease.sh).
 
 ## Installation
 
