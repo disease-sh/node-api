@@ -3,14 +3,14 @@
 	<h6>(aka covidapi)</h6>
 	<strong> <i>A JavaScript Wrapper for the <a href="https://disease.sh">novelCOVID API</a></i></strong><br><br>
 
-![GitHub top language](https://img.shields.io/github/languages/top/novelcovid/node-api)
+![GitHub top language](https://img.shields.io/github/languages/top/disease-sh/node-api)
 ![Snyk Vulnerabilities for npm scoped package](https://img.shields.io/snyk/vulnerabilities/npm/novelcovid)
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/novelcovid/node-api)
-![GitHub last commit](https://img.shields.io/github/last-commit/novelcovid/node-api)<br>
+![GitHub last commit](https://img.shields.io/github/last-commit/disease-sh/node-api)<br>
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/novelcovid)
 ![npm](https://img.shields.io/npm/dw/novelcovid)<br>
-![GitHub issues](https://img.shields.io/github/issues-raw/novelcovid/node-api)
-![GitHub](https://img.shields.io/github/license/novelcovid/node-api)
+![GitHub issues](https://img.shields.io/github/issues-raw/disease-sh/node-api)
+![GitHub](https://img.shields.io/github/license/disease-sh/node-api)
 
 </div>
 <br>
