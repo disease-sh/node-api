@@ -10,7 +10,8 @@
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/novelcovid)
 ![npm](https://img.shields.io/npm/dw/novelcovid)<br>
 ![GitHub issues](https://img.shields.io/github/issues-raw/disease-sh/node-api)
-![GitHub](https://img.shields.io/github/license/disease-sh/node-api)
+![License](https://img.shields.io/github/license/disease-sh/node-api)
+![Profile visits](https://badges.pufler.dev/visits/disease-sh/node-api)
 
 </div>
 <br>
