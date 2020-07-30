@@ -913,20 +913,7 @@ describe('NY TIMES', function() {
       row.should.have.property('deaths')
     }
   })
-
-  it('/v2/nyt/counties', async function () {
-    const data = await api.nyt.counties()
-    data.should.be.a('array')
-    for(let row of data){
-      row.should.have.property('date')
-      row.should.have.property('county')
-      row.should.have.property('state')
-      row.should.have.property('fips')
-      row.should.have.property('cases')
-      row.should.have.property('deaths')
-    }
-  })
-
+  
   it('/v2/nyt/counties/cook', async function () {
     const data = await api.nyt.counties({county:'cook'})
     data.should.be.a('array')
