@@ -13,7 +13,7 @@ const createPath = (opts, path) => {
     if(opts.twoDaysAgo)
       path += (opts.sort || opts.yesterday ?'&':'')+'twoDaysAgo='+opts.twoDaysAgo
     if(String(opts.allowNull) !== 'undefined')
-      path += (opts.sort || opts.yesterday || opts.twoDaysAgo ?'&':'')+'allowNull='+opts.yesterday
+      path += (opts.sort || opts.yesterday || opts.twoDaysAgo ?'&':'')+'allowNull='+opts.allowNull
     if(String(opts.strict) !== 'undefined') 
       path += (opts.sort || opts.yesterday || opts.twoDaysAgo || String(opts.allowNull) !== 'undefined' ?'&':'')+'strict='+opts.strict
   }
