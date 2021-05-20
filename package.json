@@ -1,6 +1,6 @@
 {
   "name": "novelcovid",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "An API wrapper to get information about COVID-19.",
   "keywords": [
     "coronavirus",
